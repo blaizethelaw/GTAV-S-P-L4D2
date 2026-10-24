@@ -1,0 +1,219 @@
+{
+  "schemaVersion": 1,
+  "name": "gameplay",
+  "columns": [
+    "id",
+    "defaultEnabled",
+    "scope",
+    "binding",
+    "firstMinute",
+    "behavior",
+    "acceptance",
+    "implementation"
+  ],
+  "rows": [
+    {
+      "id": "menu",
+      "defaultEnabled": false,
+      "scope": "solo_story_mode",
+      "binding": "menu",
+      "firstMinute": "Open the menu and enable the local mashup encounter.",
+      "behavior": "Opt-in menu with board, portal tool, encounter start/stop and editable bindings.",
+      "acceptance": "Opening and closing the menu preserves ordinary campaign input; holding the chord does not repeatedly toggle it.",
+      "implementation": "planned"
+    },
+    {
+      "id": "board",
+      "defaultEnabled": false,
+      "scope": "solo_story_mode",
+      "binding": "board",
+      "firstMinute": "Enable board mode and perform one ollie or flip from installed skate. data.",
+      "behavior": "One board, controller flick gesture and keyboard equivalent, installed trick names/parameters and event audio.",
+      "acceptance": "The displayed and scored trick resolves to the player-owned skate. records; disabling restores normal on-foot movement.",
+      "implementation": "planned"
+    },
+    {
+      "id": "portals",
+      "defaultEnabled": false,
+      "scope": "solo_story_mode",
+      "binding": "portal_blue",
+      "firstMinute": "Place linked portals and cross once while preserving momentum.",
+      "behavior": "A blue/orange pair moves player, current vehicle and nearby eligible NPCs/infected; rotate position, velocity and heading.",
+      "acceptance": "Two-way traversal works once per crossing, preserves speed, rejects obstructed exits and restores ordinary collision.",
+      "implementation": "planned"
+    },
+    {
+      "id": "outbreak",
+      "defaultEnabled": false,
+      "scope": "solo_story_mode",
+      "binding": "start_encounter",
+      "firstMinute": "Start one small local wave and lure its Tank through a portal.",
+      "behavior": "Local encounter using real installed Left 4 Dead 2 infected content; no global campaign replacement.",
+      "acceptance": "Only encounter-owned entities are removed on stop; real L4D2 content is visibly present and the Tank can be trapped through portals.",
+      "implementation": "planned"
+    }
+  ],
+  "checks": {
+    "menu": {
+      "id": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "defaultEnabled": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "scope": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "binding": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "firstMinute": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "behavior": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "acceptance": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "implementation": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      }
+    },
+    "board": {
+      "id": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "defaultEnabled": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "scope": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "binding": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "firstMinute": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "behavior": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "acceptance": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "implementation": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      }
+    },
+    "portals": {
+      "id": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "defaultEnabled": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "scope": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "binding": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "firstMinute": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "behavior": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "acceptance": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "implementation": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      }
+    },
+    "outbreak": {
+      "id": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "defaultEnabled": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "scope": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "binding": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "firstMinute": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "behavior": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "acceptance": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      },
+      "implementation": {
+        "status": "verified",
+        "evidence": "Accepted creator scope in MODLOG.md and handoff: solo GTA V Legacy Story Mode; opt-in skate, linked portals, small infected wave and Tank trap. This verifies the specified first-playable behavior, not implementation or gameplay."
+      }
+    }
+  },
+  "references": [
+    {
+      "column": "binding",
+      "sheet": "bindings"
+    }
+  ],
+  "types": {
+    "defaultEnabled": {
+      "type": "boolean"
+    },
+    "scope": {
+      "type": "string",
+      "enum": [
+        "solo_story_mode"
+      ]
+    },
+    "implementation": {
+      "type": "string",
+      "enum": [
+        "planned",
+        "source_written",
+        "runtime_verified"
+      ]
+    }
+  }
+}

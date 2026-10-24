@@ -1,0 +1,579 @@
+{
+  "schemaVersion": 1,
+  "scope": "development diagnostic, independent of blocked gameplay build",
+  "natives": {
+    "columns": [
+      "id",
+      "namespace",
+      "hash",
+      "expectedRva",
+      "purpose",
+      "evidence",
+      "status"
+    ],
+    "rows": [
+      {
+        "id": "WAIT",
+        "namespace": "SYSTEM",
+        "hash": "0x4EDE34FBADD967A6",
+        "expectedRva": "0x1678AC8",
+        "purpose": "sentinel",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Sentinel RVAs independently observed in LSOutbreak 3889.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "PLAYER_PED_ID",
+        "namespace": "PLAYER",
+        "hash": "0xD80958FC74E988A6",
+        "expectedRva": "0xCE6BE8",
+        "purpose": "sentinel",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Sentinel RVAs independently observed in LSOutbreak 3889.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "PLAYER_ID",
+        "namespace": "PLAYER",
+        "hash": "0x4F8644AF03D0E0D6",
+        "expectedRva": "capture-only",
+        "purpose": "player",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "GET_PLAYER_PED",
+        "namespace": "PLAYER",
+        "hash": "0x43A66C31C68491C0",
+        "expectedRva": "capture-only",
+        "purpose": "player",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "GET_ENTITY_COORDS",
+        "namespace": "ENTITY",
+        "hash": "0x3FEF770D40960D5A",
+        "expectedRva": "capture-only",
+        "purpose": "entity",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "SET_ENTITY_COORDS",
+        "namespace": "ENTITY",
+        "hash": "0x06843DA7060A026B",
+        "expectedRva": "capture-only",
+        "purpose": "entity",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "SET_ENTITY_COORDS_NO_OFFSET",
+        "namespace": "ENTITY",
+        "hash": "0x239A3351AC1DA385",
+        "expectedRva": "capture-only",
+        "purpose": "entity",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "GET_ENTITY_VELOCITY",
+        "namespace": "ENTITY",
+        "hash": "0x4805D2B1D8CF94A9",
+        "expectedRva": "capture-only",
+        "purpose": "entity",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "SET_ENTITY_VELOCITY",
+        "namespace": "ENTITY",
+        "hash": "0x1C99BB7B6E96D16F",
+        "expectedRva": "capture-only",
+        "purpose": "entity",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "GET_ENTITY_HEADING",
+        "namespace": "ENTITY",
+        "hash": "0xE83D4F9BA2A38914",
+        "expectedRva": "capture-only",
+        "purpose": "entity",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "SET_ENTITY_HEADING",
+        "namespace": "ENTITY",
+        "hash": "0x8E2530AA8ADA980E",
+        "expectedRva": "capture-only",
+        "purpose": "entity",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "GET_ENTITY_ROTATION",
+        "namespace": "ENTITY",
+        "hash": "0xAFBD61CC738D9EB9",
+        "expectedRva": "capture-only",
+        "purpose": "entity",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "SET_ENTITY_ROTATION",
+        "namespace": "ENTITY",
+        "hash": "0x8524A8B0171D5E07",
+        "expectedRva": "capture-only",
+        "purpose": "entity",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "SET_ENTITY_COLLISION",
+        "namespace": "ENTITY",
+        "hash": "0x1A9205C1B9EE827F",
+        "expectedRva": "capture-only",
+        "purpose": "entity",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "SET_ENTITY_INVINCIBLE",
+        "namespace": "ENTITY",
+        "hash": "0x3882114BDE571AD4",
+        "expectedRva": "capture-only",
+        "purpose": "entity",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "DOES_ENTITY_EXIST",
+        "namespace": "ENTITY",
+        "hash": "0x7239B21A38F536BA",
+        "expectedRva": "capture-only",
+        "purpose": "entity",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "DELETE_ENTITY",
+        "namespace": "ENTITY",
+        "hash": "0xAE3CBE5BF394C9C9",
+        "expectedRva": "capture-only",
+        "purpose": "entity",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "GET_ENTITY_MODEL",
+        "namespace": "ENTITY",
+        "hash": "0x9F47B058362C84B5",
+        "expectedRva": "capture-only",
+        "purpose": "entity",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "GET_ENTITY_TYPE",
+        "namespace": "ENTITY",
+        "hash": "0x8ACD366038D14505",
+        "expectedRva": "capture-only",
+        "purpose": "entity",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "IS_ENTITY_DEAD",
+        "namespace": "ENTITY",
+        "hash": "0x5F9532F3B5CC2551",
+        "expectedRva": "capture-only",
+        "purpose": "entity",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "GET_ENTITY_SPEED",
+        "namespace": "ENTITY",
+        "hash": "0xD5037BA82E12416F",
+        "expectedRva": "capture-only",
+        "purpose": "entity",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "SET_ENTITY_AS_MISSION_ENTITY",
+        "namespace": "ENTITY",
+        "hash": "0xAD738C3085FE7E11",
+        "expectedRva": "capture-only",
+        "purpose": "entity",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "ATTACH_ENTITY_TO_ENTITY",
+        "namespace": "ENTITY",
+        "hash": "0x6B9BBD38AB0796DF",
+        "expectedRva": "capture-only",
+        "purpose": "entity",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "GET_FINAL_RENDERED_CAM_COORD",
+        "namespace": "CAM",
+        "hash": "0xA200EB1EE790F448",
+        "expectedRva": "capture-only",
+        "purpose": "camera",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "GET_FINAL_RENDERED_CAM_ROT",
+        "namespace": "CAM",
+        "hash": "0x5B4E4C817FCC2DFB",
+        "expectedRva": "capture-only",
+        "purpose": "camera",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "GET_FINAL_RENDERED_CAM_FOV",
+        "namespace": "CAM",
+        "hash": "0x80EC114669DAEFF4",
+        "expectedRva": "capture-only",
+        "purpose": "camera",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "GET_GAMEPLAY_CAM_COORD",
+        "namespace": "CAM",
+        "hash": "0x14D6F5678D8F1B37",
+        "expectedRva": "capture-only",
+        "purpose": "camera",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "GET_GAMEPLAY_CAM_ROT",
+        "namespace": "CAM",
+        "hash": "0x837765A25378F0BB",
+        "expectedRva": "capture-only",
+        "purpose": "camera",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "DRAW_MARKER",
+        "namespace": "GRAPHICS",
+        "hash": "0x28477EC23D892089",
+        "expectedRva": "capture-only",
+        "purpose": "drawing",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "GET_HASH_KEY",
+        "namespace": "MISC",
+        "hash": "0xD24D37CC275948CC",
+        "expectedRva": "capture-only",
+        "purpose": "models",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "REQUEST_MODEL",
+        "namespace": "STREAMING",
+        "hash": "0x963D27A58DF860AC",
+        "expectedRva": "capture-only",
+        "purpose": "models",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "HAS_MODEL_LOADED",
+        "namespace": "STREAMING",
+        "hash": "0x98A4EB5D89A0C952",
+        "expectedRva": "capture-only",
+        "purpose": "models",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "IS_MODEL_VALID",
+        "namespace": "STREAMING",
+        "hash": "0xC0296A2EDF545E92",
+        "expectedRva": "capture-only",
+        "purpose": "models",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "SET_MODEL_AS_NO_LONGER_NEEDED",
+        "namespace": "STREAMING",
+        "hash": "0xE532F5D78798DAAB",
+        "expectedRva": "capture-only",
+        "purpose": "models",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "CREATE_OBJECT",
+        "namespace": "OBJECT",
+        "hash": "0x509D5878EB39E842",
+        "expectedRva": "capture-only",
+        "purpose": "models",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "CREATE_OBJECT_NO_OFFSET",
+        "namespace": "OBJECT",
+        "hash": "0x9A294B2138ABB884",
+        "expectedRva": "capture-only",
+        "purpose": "models",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "DELETE_OBJECT",
+        "namespace": "OBJECT",
+        "hash": "0x539E0AE3E6634B9F",
+        "expectedRva": "capture-only",
+        "purpose": "models",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "CREATE_PED",
+        "namespace": "PED",
+        "hash": "0xD49F9B0955C367DE",
+        "expectedRva": "capture-only",
+        "purpose": "models",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "DELETE_PED",
+        "namespace": "PED",
+        "hash": "0x9614299DCB53E54B",
+        "expectedRva": "capture-only",
+        "purpose": "models",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "START_SHAPE_TEST_LOS_PROBE",
+        "namespace": "SHAPETEST",
+        "hash": "0x7EE9F5D83DD4F90E",
+        "expectedRva": "capture-only",
+        "purpose": "raycast",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "START_SHAPE_TEST_CAPSULE",
+        "namespace": "SHAPETEST",
+        "hash": "0x28579D1B8F8AAC80",
+        "expectedRva": "capture-only",
+        "purpose": "raycast",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "GET_SHAPE_TEST_RESULT",
+        "namespace": "SHAPETEST",
+        "hash": "0x3D87450E15D98694",
+        "expectedRva": "capture-only",
+        "purpose": "raycast",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "GET_GROUND_Z_FOR_3D_COORD",
+        "namespace": "MISC",
+        "hash": "0xC906A7DAB05C8D2B",
+        "expectedRva": "capture-only",
+        "purpose": "raycast",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "GET_CONTROL_NORMAL",
+        "namespace": "PAD",
+        "hash": "0xEC3C9B8D5327B563",
+        "expectedRva": "capture-only",
+        "purpose": "controls",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "IS_CONTROL_JUST_PRESSED",
+        "namespace": "PAD",
+        "hash": "0x580417101DDB492F",
+        "expectedRva": "capture-only",
+        "purpose": "controls",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "DISABLE_CONTROL_ACTION",
+        "namespace": "PAD",
+        "hash": "0xFE99B66D079CF6BC",
+        "expectedRva": "capture-only",
+        "purpose": "controls",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "GET_DISABLED_CONTROL_NORMAL",
+        "namespace": "PAD",
+        "hash": "0x11E65974A982637C",
+        "expectedRva": "capture-only",
+        "purpose": "controls",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "IS_DISABLED_CONTROL_JUST_PRESSED",
+        "namespace": "PAD",
+        "hash": "0x91AEF906BCA88877",
+        "expectedRva": "capture-only",
+        "purpose": "controls",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "IS_USING_KEYBOARD_AND_MOUSE",
+        "namespace": "PAD",
+        "hash": "0xA571D46727E2B718",
+        "expectedRva": "capture-only",
+        "purpose": "controls",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "NETWORK_IS_GAME_IN_PROGRESS",
+        "namespace": "NETWORK",
+        "hash": "0x10FAB35428CCC9D7",
+        "expectedRva": "capture-only",
+        "purpose": "guard",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "NETWORK_IS_SESSION_ACTIVE",
+        "namespace": "NETWORK",
+        "hash": "0xD83C2B94E7508980",
+        "expectedRva": "capture-only",
+        "purpose": "guard",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "GET_GAME_TIMER",
+        "namespace": "MISC",
+        "hash": "0x9CD27B0045628463",
+        "expectedRva": "capture-only",
+        "purpose": "clock",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      }
+    ]
+  },
+  "settings": {
+    "columns": [
+      "id",
+      "value",
+      "evidence",
+      "status"
+    ],
+    "rows": [
+      {
+        "id": "probe_id",
+        "value": "NativeDump-3889-v2-dev-only",
+        "evidence": "Current local PE metadata and inspected SHV resolver ABI; development-only requirements.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "game_version",
+        "value": "1.0.3889.0",
+        "evidence": "Current local PE metadata and inspected SHV resolver ABI; development-only requirements.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "game_timestamp",
+        "value": "1783602899",
+        "evidence": "Current local PE metadata and inspected SHV resolver ABI; development-only requirements.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "game_image_size",
+        "value": "65387520",
+        "evidence": "Current local PE metadata and inspected SHV resolver ABI; development-only requirements.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "shv_sha256",
+        "value": "126be57ca9dca00e471f9de611766009c900aad88f89ae6c2926ec62e5aaeb4f",
+        "evidence": "Current local PE metadata and inspected SHV resolver ABI; development-only requirements.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "shv_timestamp",
+        "value": "1784063389",
+        "evidence": "Current local PE metadata and inspected SHV resolver ABI; development-only requirements.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "shv_image_size",
+        "value": "2035712",
+        "evidence": "Current local PE metadata and inspected SHV resolver ABI; development-only requirements.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "last_native_rva",
+        "value": "0x1E7F08",
+        "evidence": "Current local PE metadata and inspected SHV resolver ABI; development-only requirements.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "register_export",
+        "value": "?scriptRegister@@YAXPEAUHINSTANCE__@@P6AXXZ@Z",
+        "evidence": "Current local PE metadata and inspected SHV resolver ABI; development-only requirements.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "wait_export",
+        "value": "?scriptWait@@YAXK@Z",
+        "evidence": "Current local PE metadata and inspected SHV resolver ABI; development-only requirements.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "init_export",
+        "value": "?nativeInit@@YAX_K@Z",
+        "evidence": "Current local PE metadata and inspected SHV resolver ABI; development-only requirements.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "warmup_frames",
+        "value": "60",
+        "evidence": "Current local PE metadata and inspected SHV resolver ABI; development-only requirements.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "required_launch_token",
+        "value": "-nobattleye",
+        "evidence": "Current local PE metadata and inspected SHV resolver ABI; development-only requirements.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "distribution",
+        "value": "development-diagnostic-only-never-package",
+        "evidence": "Current local PE metadata and inspected SHV resolver ABI; development-only requirements.",
+        "status": "verified-inventory"
+      }
+    ]
+  }
+}

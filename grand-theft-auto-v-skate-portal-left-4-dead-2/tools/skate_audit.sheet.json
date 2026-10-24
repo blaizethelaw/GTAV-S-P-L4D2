@@ -1,0 +1,21 @@
+{
+  "schemaVersion": 1,
+  "name": "skate_audit",
+  "columns": ["id", "purpose", "sourceToc", "bundleName", "contentPolicy"],
+  "rows": [{
+    "id": "read_only_scorable_audit",
+    "purpose": "Diagnostic parser audit only; no game launch or playable-build claim",
+    "sourceToc": "Data/Win32/levels/game/dingolevel_ftue_island/dingolevel_ftue_island.toc",
+    "bundleName": "win32/levels/game/dingolevel_ftue_island/dingolevel_ftue_island",
+    "contentPolicy": "Read selected scorable EBX in memory from installed CAS; use installed decoder in place; output counts only"
+  }],
+  "checks": {
+    "read_only_scorable_audit": {
+      "id": {"status": "verified", "evidence": "Unique diagnostic audit identifier"},
+      "purpose": {"status": "verified", "evidence": "tests/test_skate_content.cpp never invokes a game or input API"},
+      "sourceToc": {"status": "verified", "evidence": "Read-only installed TOC lookup verified on 2026-10-24"},
+      "bundleName": {"status": "verified", "evidence": "Installed TOC contains named bundle and 540 scorable/group EBX references"},
+      "contentPolicy": {"status": "verified", "evidence": "Reader exposes no output/cache API; diagnostic emits counts only"}
+    }
+  }
+}

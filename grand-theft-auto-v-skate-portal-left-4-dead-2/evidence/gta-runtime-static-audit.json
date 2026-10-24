@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 1,
+  "mode": "read-only-static-file-scan",
+  "executable": "E:\\C Backup\\Steam\\steamapps\\common\\Grand Theft Auto V\\GTA5.exe",
+  "length": 47467128,
+  "sha256": "677e4e355cfbdb13273b1d992407e3c261b3a108dc4dd5c8a0c4c1da651802e5",
+  "sections": [
+    {
+      "name": ".text",
+      "rva": 4096,
+      "virtualSize": 27055616,
+      "rawOffset": 1536,
+      "rawSize": 27055616,
+      "executable": true
+    },
+    {
+      "name": "BINK",
+      "rva": 27062272,
+      "virtualSize": 3072,
+      "rawOffset": 27057152,
+      "rawSize": 3072,
+      "executable": true
+    },
+    {
+      "name": "BINKBSS",
+      "rva": 27066368,
+      "virtualSize": 96,
+      "rawOffset": 0,
+      "rawSize": 0,
+      "executable": false
+    },
+    {
+      "name": ".rdata",
+      "rva": 27070464,
+      "virtualSize": 3442176,
+      "rawOffset": 27060224,
+      "rawSize": 3442176,
+      "executable": false
+    },
+    {
+      "name": ".data",
+      "rva": 30515200,
+      "virtualSize": 19587208,
+      "rawOffset": 30502400,
+      "rawSize": 1679360,
+      "executable": false
+    },
+    {
+      "name": ".pdata",
+      "rva": 50106368,
+      "virtualSize": 1101312,
+      "rawOffset": 32181760,
+      "rawSize": 1101312,
+      "executable": false
+    },
+    {
+      "name": ".tls",
+      "rva": 51208192,
+      "virtualSize": 11264,
+      "rawOffset": 33283072,
+      "rawSize": 11264,
+      "executable": false
+    },
+    {
+      "name": "BINKCONS",
+      "rva": 51220480,
+      "virtualSize": 512,
+      "rawOffset": 33294336,
+      "rawSize": 512,
+      "executable": false
+    },
+    {
+      "name": ".rsrc",
+      "rva": 51224576,
+      "virtualSize": 187904,
+      "rawOffset": 33294848,
+      "rawSize": 187904,
+      "executable": false
+    },
+    {
+      "name": ".reloc",
+      "rva": 51412992,
+      "virtualSize": 523776,
+      "rawOffset": 33482752,
+      "rawSize": 523776,
+      "executable": false
+    },
+    {
+      "name": ".text",
+      "rva": 51937280,
+      "virtualSize": 13450240,
+      "rawOffset": 34006528,
+      "rawSize": 13450240,
+      "executable": true
+    }
+  ],
+  "observations": [
+    {
+      "hookId": "native-registry",
+      "matchCount": 0,
+      "hits": [],
+      "runtimeVerified": false
+    },
+    {
+      "hookId": "script-tick",
+      "matchCount": 0,
+      "hits": [],
+      "runtimeVerified": false
+    },
+    {
+      "hookId": "script-tls",
+      "matchCount": 0,
+      "hits": [],
+      "runtimeVerified": false
+    },
+    {
+      "hookId": "script-collection",
+      "matchCount": 0,
+      "hits": [],
+      "runtimeVerified": false
+    }
+  ],
+  "runtimeReady": false,
+  "limitation": "No process was started or inspected. Static matches never authorize hooks."
+}

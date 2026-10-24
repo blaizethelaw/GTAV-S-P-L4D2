@@ -1,0 +1,20 @@
+{
+  "scope": "development diagnostic only; gameplay preflight remains separate",
+  "errors": [],
+  "nativeRows": 52,
+  "sheetSha256": "9be3a03ff8510b2ab5c0b9304a7965aa4c75ae56d3aa2f879ca7947cb4373327",
+  "binarySha256": "f8189ee48dfc9ad3093effdeea92df3c4c8ae2a829be95dd3709968332c95ed6",
+  "bytes": 591443,
+  "exports": [
+    "InitializeASI"
+  ],
+  "imports": [
+    "bcrypt.dll",
+    "KERNEL32.dll",
+    "msvcrt.dll",
+    "SHELL32.dll",
+    "VERSION.dll"
+  ],
+  "flowTests": "passed",
+  "runtimeTest": "not run; launch permission required"
+}

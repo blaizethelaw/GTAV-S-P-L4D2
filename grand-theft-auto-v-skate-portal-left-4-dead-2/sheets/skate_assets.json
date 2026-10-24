@@ -1,0 +1,43 @@
+{
+  "schema": 1,
+  "game": "skate",
+  "ownership": "Read each player's installed files in place. No extracted content persists or ships.",
+  "rows": [
+    {
+      "id": "skate_toc_index",
+      "source": "Data/Win32/customization.toc",
+      "kind": "archive_index",
+      "runtime_route": "bounded read-only TOC/CAS parser; decode only requested assets in memory",
+      "status": "inspection_verified",
+      "evidence": "Installed header 00D1CE01, 556-byte envelope, big-endian tables, compressed-name flag 4; 431 bundles and 6176 chunks.",
+      "remaining": "Resolve a concrete board model, texture and in-memory decoder."
+    },
+    {
+      "id": "skate_board",
+      "source": "unresolved",
+      "kind": "board_mesh_texture",
+      "runtime_route": "in-memory CAS to mesh/texture, then GTA rendering adapter",
+      "status": "unverified",
+      "evidence": "No concrete mesh or texture resolved yet.",
+      "remaining": "Bundle lookup, dependency resolution, codec decode, visual integration and gameplay test."
+    },
+    {
+      "id": "skate_trick_rules",
+      "source": "unresolved",
+      "kind": "gameplay_parameters",
+      "runtime_route": "read actual EBX rule parameters if the archive identifies their schema",
+      "status": "unverified",
+      "evidence": "No trick rules resolved yet. Generic invented rules do not count as skate content.",
+      "remaining": "Identify data and schema; no assumption that the shipping client exposes its rules."
+    },
+    {
+      "id": "skate_board_audio",
+      "source": "unresolved",
+      "kind": "sound",
+      "runtime_route": "read selected board-event sounds from CAS into memory",
+      "status": "unverified",
+      "evidence": "No concrete sound resolved yet.",
+      "remaining": "Resolve audio assets, codec support and playback without copied game files."
+    }
+  ]
+}

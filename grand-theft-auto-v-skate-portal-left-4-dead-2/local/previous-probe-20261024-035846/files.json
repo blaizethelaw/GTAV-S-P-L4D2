@@ -1,0 +1,17 @@
+[
+  {
+    "Name": "ScriptHookV.dll",
+    "Path": "E:\\C Backup\\Steam\\steamapps\\common\\Grand Theft Auto V\\ScriptHookV.dll",
+    "SHA256": "126BE57CA9DCA00E471F9DE611766009C900AAD88F89AE6C2926EC62E5AAEB4F"
+  },
+  {
+    "Name": "dinput8.dll",
+    "Path": "E:\\C Backup\\Steam\\steamapps\\common\\Grand Theft Auto V\\dinput8.dll",
+    "SHA256": "9FD9E02353B7D39FE07B9667F7EA2697229A7F2D0E7D389EB79EB212B1BB181D"
+  },
+  {
+    "Name": "NativeDump.asi",
+    "Path": "E:\\C Backup\\Steam\\steamapps\\common\\Grand Theft Auto V\\NativeDump.asi",
+    "SHA256": "2C1CD8C693C739F543614C6EC769618C693B9D372341DF68DA9581E0398C0285"
+  }
+]

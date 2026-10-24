@@ -1,0 +1,13 @@
+# Development native-address probe — never a release component
+
+This diagnostic fixes the old probe's lifecycle bug: ScriptHookV calls the script entry point once, so the warmup now calls `scriptWait(0)` in a real loop. The script remains on its fiber and yields after completing or failing. It never calls `nativeCall` or invokes a game handler, writes game assets, changes anti-cheat files or services, closes a game, or moves its window.
+
+`probe.sheet.json` is this diagnostic's source of truth. `build.py` checks all inventory cells and configuration references, generates one native/configuration record per row, runs regression tests, compiles with warnings as errors, and inspects the PE. The gameplay build's existing unresolved cells remain blocked. This build is only a tool to obtain evidence for them.
+
+The 52 hashes come from already inspected local native metadata and were checked against this specific ScriptHookV's hash inventory. Only the WAIT and PLAYER_PED_ID addresses are expectations. All other addresses remain unknown until the probe runs. ScriptHookV is a temporary local development helper, is dynamically resolved, and must never be in the published package or a player's dependency list.
+
+The runtime rejects anything except GTA5.exe 1.0.3889.0 with matching host PE timestamp/image size and an explicit `-nobattleye` command-line token. It also checks the helper's complete SHA-256 and loaded image metadata before any export call. All resolved addresses must fall inside committed executable image memory belonging to GTA5.exe. The two independently observed sentinel addresses must match before inventory collection proceeds. It reads no game assets and exports addresses only.
+
+Output is a new run directory under `%LOCALAPPDATA%/NativeDump/runs/`, never an earlier run. `latest-run.txt` contains its UTF-8 absolute path. `log.txt` records initialization, registration, entry into the script, every 15 warmup frames and each native. `natives.csv` has the header `name,hash,rva,status`; hex values have 16 digits and `status` is `ok`. `manifest.json` gives version/hash evidence, counts and result. `done.txt` is emitted only after all 52 addresses and the manifest have been flushed. A passing run has 54 executable-memory checks, including the two preliminary sentinels.
+
+Runtime success is **not yet tested**. A new game launch needs the creator's permission. Install only after reviewing the build report; use Steam/Rockstar to launch, not GTA5.exe directly. Do not stop an existing game. Do not ship or otherwise package `tools/dev_probe`, `build/dev_probe`, ScriptHookV, or its loader.

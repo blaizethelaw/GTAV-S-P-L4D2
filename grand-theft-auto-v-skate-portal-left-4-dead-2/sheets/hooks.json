@@ -1,0 +1,282 @@
+{
+  "schemaVersion": 1,
+  "name": "hooks",
+  "columns": [
+    "id",
+    "game",
+    "build",
+    "purpose",
+    "candidateSignature",
+    "source",
+    "resolvedRva",
+    "acceptance"
+  ],
+  "rows": [
+    {
+      "id": "native-registry",
+      "game": "gta-v",
+      "build": "1.0.3889.0",
+      "purpose": "Locate game native registry",
+      "candidateSignature": "76 32 48 8B 53 40",
+      "source": "https://raw.githubusercontent.com/citizenfx/fivem/master/code/components/rage-scripting-five/src/scrEngine.cpp",
+      "resolvedRva": "unresolved",
+      "acceptance": "Unique runtime match plus bounded valid registration traversal"
+    },
+    {
+      "id": "script-tick",
+      "game": "gta-v",
+      "build": "1.0.3889.0",
+      "purpose": "Run callback on the game script thread",
+      "candidateSignature": "48 83 EC 20 80 B9 ? 01 00 00 00 8B FA",
+      "source": "https://raw.githubusercontent.com/citizenfx/fivem/master/code/components/rage-scripting-five/src/scrEngine.cpp",
+      "resolvedRva": "unresolved",
+      "acceptance": "Verified function boundary and calling convention; existing story scripts remain intact"
+    },
+    {
+      "id": "script-tls",
+      "game": "gta-v",
+      "build": "1.0.3889.0",
+      "purpose": "Read active game script context",
+      "candidateSignature": "48 8B 04 D0 4A 8B 14 00 48 8B 01 F3 44 0F 2C 42 20",
+      "source": "https://raw.githubusercontent.com/citizenfx/fivem/master/code/components/rage-scripting-five/src/scrEngine.cpp",
+      "resolvedRva": "unresolved",
+      "acceptance": "Verified active-thread TLS offset and safe restoration after each callback"
+    },
+    {
+      "id": "script-collection",
+      "game": "gta-v",
+      "build": "1.0.3889.0",
+      "purpose": "Validate game script thread collection",
+      "candidateSignature": "48 8B C8 EB ? 33 C9 48 8B 05",
+      "source": "https://raw.githubusercontent.com/citizenfx/fivem/master/code/components/rage-scripting-five/src/scrEngine.cpp",
+      "resolvedRva": "unresolved",
+      "acceptance": "Unique runtime match and correctly bounded collection of valid script threads"
+    },
+    {
+      "id": "native-hash-map",
+      "game": "gta-v",
+      "build": "1.0.3889.0",
+      "purpose": "Map stable native identifiers to installed-build hashes",
+      "candidateSignature": "not-applicable",
+      "source": "creator-requirements",
+      "resolvedRva": "unresolved",
+      "acceptance": "Verified build 3889 hash mapping and scalar/vector roundtrip tests"
+    },
+    {
+      "id": "story-mode-guard",
+      "game": "gta-v",
+      "build": "1.0.3889.0",
+      "purpose": "Reject non-Story-Mode or unsupported host launch",
+      "candidateSignature": "not-applicable",
+      "source": "creator-requirements",
+      "resolvedRva": "unresolved",
+      "acceptance": "GTA5.exe 1.0.3889.0 fingerprint; launch token -nobattleye; verified online-session guard"
+    }
+  ],
+  "checks": {
+    "native-registry": {
+      "id": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "game": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "build": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "purpose": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "candidateSignature": {
+        "status": "verified",
+        "evidence": "Candidate is documented at source URL; not a claim of installed-build compatibility. Static scan has zero matches."
+      },
+      "source": {
+        "status": "verified",
+        "evidence": "Primary source inspected 2026-10-23; candidate observations only, no source copied or linked."
+      },
+      "resolvedRva": {
+        "status": "pending",
+        "evidence": "No runtime verification; unresolved native mapping, game-thread context or Story Mode guard. Blocks ASI build."
+      },
+      "acceptance": {
+        "status": "pending",
+        "evidence": "Required runtime acceptance test has not run; no host game launched."
+      }
+    },
+    "script-tick": {
+      "id": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "game": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "build": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "purpose": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "candidateSignature": {
+        "status": "verified",
+        "evidence": "Candidate is documented at source URL; not a claim of installed-build compatibility. Static scan has zero matches."
+      },
+      "source": {
+        "status": "verified",
+        "evidence": "Primary source inspected 2026-10-23; candidate observations only, no source copied or linked."
+      },
+      "resolvedRva": {
+        "status": "pending",
+        "evidence": "No runtime verification; unresolved native mapping, game-thread context or Story Mode guard. Blocks ASI build."
+      },
+      "acceptance": {
+        "status": "pending",
+        "evidence": "Required runtime acceptance test has not run; no host game launched."
+      }
+    },
+    "script-tls": {
+      "id": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "game": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "build": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "purpose": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "candidateSignature": {
+        "status": "verified",
+        "evidence": "Candidate is documented at source URL; not a claim of installed-build compatibility. Static scan has zero matches."
+      },
+      "source": {
+        "status": "verified",
+        "evidence": "Primary source inspected 2026-10-23; candidate observations only, no source copied or linked."
+      },
+      "resolvedRva": {
+        "status": "pending",
+        "evidence": "No runtime verification; unresolved native mapping, game-thread context or Story Mode guard. Blocks ASI build."
+      },
+      "acceptance": {
+        "status": "pending",
+        "evidence": "Required runtime acceptance test has not run; no host game launched."
+      }
+    },
+    "script-collection": {
+      "id": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "game": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "build": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "purpose": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "candidateSignature": {
+        "status": "verified",
+        "evidence": "Candidate is documented at source URL; not a claim of installed-build compatibility. Static scan has zero matches."
+      },
+      "source": {
+        "status": "verified",
+        "evidence": "Primary source inspected 2026-10-23; candidate observations only, no source copied or linked."
+      },
+      "resolvedRva": {
+        "status": "pending",
+        "evidence": "No runtime verification; unresolved native mapping, game-thread context or Story Mode guard. Blocks ASI build."
+      },
+      "acceptance": {
+        "status": "pending",
+        "evidence": "Required runtime acceptance test has not run; no host game launched."
+      }
+    },
+    "native-hash-map": {
+      "id": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "game": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "build": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "purpose": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "candidateSignature": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "source": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "resolvedRva": {
+        "status": "pending",
+        "evidence": "No runtime verification; unresolved native mapping, game-thread context or Story Mode guard. Blocks ASI build."
+      },
+      "acceptance": {
+        "status": "pending",
+        "evidence": "Required runtime acceptance test has not run; no host game launched."
+      }
+    },
+    "story-mode-guard": {
+      "id": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "game": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "build": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "purpose": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "candidateSignature": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "source": {
+        "status": "verified",
+        "evidence": "Explicit implementation requirement from the creator brief and accepted runtime design."
+      },
+      "resolvedRva": {
+        "status": "pending",
+        "evidence": "No runtime verification; unresolved native mapping, game-thread context or Story Mode guard. Blocks ASI build."
+      },
+      "acceptance": {
+        "status": "pending",
+        "evidence": "Required runtime acceptance test has not run; no host game launched."
+      }
+    }
+  }
+}
