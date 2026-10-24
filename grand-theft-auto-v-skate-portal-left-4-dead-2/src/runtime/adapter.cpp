@@ -9,7 +9,8 @@
 namespace lsa::runtime {
 
 using WaitFn = void(__cdecl*)(uint32_t);
-using NativeInitFn = void(__cdecl*)(uint64_t);
+using NativeRegistrationHandler = void(__cdecl*)(NativeContext*);
+using NativeInitFn = NativeRegistrationHandler(__cdecl*)(uint64_t);
 
 static WaitFn g_originalWait = nullptr;
 static std::vector<std::function<void()>> g_tickCallbacks;
@@ -37,10 +38,8 @@ void Initialize(void* module_handle) {
 
     MH_Initialize();
 
-    // Instead of a hardcoded RVA, use the scanner to find the WAIT native
     g_waitTarget = Scanner::FindPattern("\x48\x89\x5C\x24\x08\x57\x48\x83\xEC\x20\x8B\xD9\x8B\xFA", "xxxxxxxxxxxxxx");
 
-    // Fallback to hardcoded if pattern scan fails
     if (!g_waitTarget) {
         g_waitTarget = g_gameBase + 0x1678AC8;
     }
@@ -57,13 +56,14 @@ bool IsReady() {
 
 void Invoke(NativeHash hash, NativeContext* ctx) {
     if (!g_nativeRegistration) {
-        // Find the native registration table using a known pattern
         g_nativeRegistration = reinterpret_cast<NativeInitFn>(Scanner::FindPattern("\x48\x8D\x0D\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x48\x8B\xC8", "xxx????x????xxx"));
     }
 
     if (g_nativeRegistration) {
-        // Normally this would be a full native engine call
-        // For now, this is a placeholder implementation that fulfills the interface
+        NativeRegistrationHandler handler = g_nativeRegistration(hash);
+        if (handler) {
+            handler(ctx);
+        }
     }
 }
 

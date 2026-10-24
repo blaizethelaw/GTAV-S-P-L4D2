@@ -14,6 +14,7 @@ public:
     Portal bluePortal;
     Portal orangePortal;
 
+    void ShootPortal(bool isBlue);
     void ShootPortal(bool isBlue, const lsa::portal::Vec3& hitPos, const lsa::portal::Vec3& normal);
     void Update();
 

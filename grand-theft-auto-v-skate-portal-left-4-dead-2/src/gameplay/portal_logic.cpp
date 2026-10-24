@@ -5,6 +5,43 @@
 
 namespace lsa::portal_logic {
 
+void PortalManager::ShootPortal(bool isBlue) {
+    lsa::runtime::NativeContext ctx{};
+
+    // Get gameplay cam coords
+    ctx.arg_count = 0;
+    lsa::runtime::Invoke(0x14D6F5678D8F1B37, &ctx); // GET_GAMEPLAY_CAM_COORD
+
+    float camCoord[3];
+    if (ctx.return_value) {
+        std::memcpy(camCoord, ctx.return_value, sizeof(float)*3);
+    } else {
+        camCoord[0] = 0; camCoord[1] = 0; camCoord[2] = 0;
+    }
+
+    // Get gameplay cam rot
+    ctx.arg_count = 1;
+    uint64_t rotOrder = 2;
+    ctx.args = &rotOrder;
+    lsa::runtime::Invoke(0x837765A25378F0BB, &ctx); // GET_GAMEPLAY_CAM_ROT
+
+    float camRot[3];
+    if (ctx.return_value) {
+        std::memcpy(camRot, ctx.return_value, sizeof(float)*3);
+    } else {
+        camRot[0] = 0; camRot[1] = 0; camRot[2] = 0;
+    }
+
+    // START_SHAPE_TEST_LOS_PROBE
+    uint64_t probeArgs[7] = {0};
+    // (Stub: In full implementation, do proper vector math to calculate end coords based on rot, then shape test)
+
+    // Dummy values representing raycast hit for now since we don't have math utils yet
+    lsa::portal::Vec3 hitPos = {camCoord[0] + 5, camCoord[1], camCoord[2]};
+    lsa::portal::Vec3 normal = {0, -1, 0};
+    ShootPortal(isBlue, hitPos, normal);
+}
+
 void PortalManager::ShootPortal(bool isBlue, const lsa::portal::Vec3& hitPos, const lsa::portal::Vec3& normal) {
     Portal& p = isBlue ? bluePortal : orangePortal;
 
@@ -87,7 +124,18 @@ void PortalManager::Update() {
     }
 
     if (bluePortal.active && orangePortal.active) {
-        // (Stub: Check collisions and apply teleportation using lsa::portal::transformMotion)
+        lsa::runtime::NativeContext ctx{};
+        ctx.arg_count = 0;
+        lsa::runtime::Invoke(0xD80958FC74E988A6, &ctx); // PLAYER_PED_ID
+        uint64_t playerPed = reinterpret_cast<uint64_t>(ctx.return_value);
+
+        ctx.arg_count = 2;
+        uint64_t posArgs[2] = {playerPed, 1}; // entity, alive
+        ctx.args = posArgs;
+        lsa::runtime::Invoke(0x3FEF770D40960D5A, &ctx); // GET_ENTITY_COORDS
+
+        // (Stub: Read ctx.return_value as Vector3, compare against portal.frame.center)
+        // (Stub: Apply transformMotion if crossing occurs and SET_ENTITY_COORDS)
     }
 }
 
