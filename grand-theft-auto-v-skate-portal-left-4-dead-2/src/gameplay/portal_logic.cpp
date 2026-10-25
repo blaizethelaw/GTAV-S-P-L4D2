@@ -1,7 +1,12 @@
 #include <cstring>
+#include <cmath>
 
 #include "portal_logic.hpp"
 #include "../runtime/adapter.hpp"
+
+// Convert degrees to radians
+constexpr float PI = 3.14159265359f;
+inline float DegToRad(float deg) { return deg * (PI / 180.0f); }
 
 namespace lsa::portal_logic {
 
@@ -32,14 +37,67 @@ void PortalManager::ShootPortal(bool isBlue) {
         camRot[0] = 0; camRot[1] = 0; camRot[2] = 0;
     }
 
-    // START_SHAPE_TEST_LOS_PROBE
-    uint64_t probeArgs[7] = {0};
-    // (Stub: In full implementation, do proper vector math to calculate end coords based on rot, then shape test)
+    // Calculate forward vector from rotation
+    float rotX = DegToRad(camRot[0]);
+    float rotZ = DegToRad(camRot[2]);
+    float multXY = std::abs(std::cos(rotX));
+    float forwardX = -std::sin(rotZ) * multXY;
+    float forwardY = std::cos(rotZ) * multXY;
+    float forwardZ = std::sin(rotX);
 
-    // Dummy values representing raycast hit for now since we don't have math utils yet
-    lsa::portal::Vec3 hitPos = {camCoord[0] + 5, camCoord[1], camCoord[2]};
-    lsa::portal::Vec3 normal = {0, -1, 0};
-    ShootPortal(isBlue, hitPos, normal);
+    float rayDistance = 1000.0f;
+    float endCoord[3] = {
+        camCoord[0] + forwardX * rayDistance,
+        camCoord[1] + forwardY * rayDistance,
+        camCoord[2] + forwardZ * rayDistance
+    };
+
+    // START_SHAPE_TEST_LOS_PROBE (0x7EE9F5D83DD4F90E)
+    // x1, y1, z1, x2, y2, z2, flags, entity, p8
+    uint64_t probeArgs[9] = {0};
+    std::memcpy(&probeArgs[0], &camCoord[0], sizeof(float));
+    std::memcpy(&probeArgs[1], &camCoord[1], sizeof(float));
+    std::memcpy(&probeArgs[2], &camCoord[2], sizeof(float));
+    std::memcpy(&probeArgs[3], &endCoord[0], sizeof(float));
+    std::memcpy(&probeArgs[4], &endCoord[1], sizeof(float));
+    std::memcpy(&probeArgs[5], &endCoord[2], sizeof(float));
+    probeArgs[6] = -1; // flags (intersect everything)
+
+    // Get player ped to ignore
+    ctx.arg_count = 0;
+    lsa::runtime::Invoke(0xD80958FC74E988A6, &ctx); // PLAYER_PED_ID
+    probeArgs[7] = reinterpret_cast<uint64_t>(ctx.return_value);
+    probeArgs[8] = 7; // p8
+
+    ctx.arg_count = 9;
+    ctx.args = probeArgs;
+    lsa::runtime::Invoke(0x7EE9F5D83DD4F90E, &ctx); // START_SHAPE_TEST_LOS_PROBE
+    uint64_t shapeTestHandle = reinterpret_cast<uint64_t>(ctx.return_value);
+
+    // GET_SHAPE_TEST_RESULT (0x3D87450E15D98694)
+    // shapeTestHandle, hit, endCoords, surfaceNormal, entityHit
+    uint32_t hit = 0;
+    float hitCoords[3] = {0};
+    float surfaceNormal[3] = {0};
+    uint64_t entityHit = 0;
+
+    uint64_t resultArgs[5] = {
+        shapeTestHandle,
+        reinterpret_cast<uint64_t>(&hit),
+        reinterpret_cast<uint64_t>(&hitCoords),
+        reinterpret_cast<uint64_t>(&surfaceNormal),
+        reinterpret_cast<uint64_t>(&entityHit)
+    };
+
+    ctx.arg_count = 5;
+    ctx.args = resultArgs;
+    lsa::runtime::Invoke(0x3D87450E15D98694, &ctx);
+
+    if (hit) {
+        lsa::portal::Vec3 hitPos = {hitCoords[0], hitCoords[1], hitCoords[2]};
+        lsa::portal::Vec3 normal = {surfaceNormal[0], surfaceNormal[1], surfaceNormal[2]};
+        ShootPortal(isBlue, hitPos, normal);
+    }
 }
 
 void PortalManager::ShootPortal(bool isBlue, const lsa::portal::Vec3& hitPos, const lsa::portal::Vec3& normal) {
@@ -81,15 +139,16 @@ void PortalManager::DrawPortal(const Portal& portal, int r, int g, int b) {
     // Direction (x, y, z) - not used for type 28
 
     // Rotation (x, y, z) - facing the portal normal
-    float rx = portal.frame.normal.x * 90.0f;
-    float ry = portal.frame.normal.y * 90.0f;
-    float rz = portal.frame.normal.z * 90.0f;
-    std::memcpy(&args[7], &rx, sizeof(float));
-    std::memcpy(&args[8], &ry, sizeof(float));
-    std::memcpy(&args[9], &rz, sizeof(float));
+    float pitch = std::atan2(-portal.frame.normal.z, std::sqrt(portal.frame.normal.x * portal.frame.normal.x + portal.frame.normal.y * portal.frame.normal.y)) * (180.0f / PI);
+    float yaw = std::atan2(portal.frame.normal.x, portal.frame.normal.y) * (180.0f / PI);
+    float roll = 0.0f; // Simplified for now
+
+    std::memcpy(&args[7], &pitch, sizeof(float));
+    std::memcpy(&args[8], &roll, sizeof(float));
+    std::memcpy(&args[9], &yaw, sizeof(float));
 
     // Scale (x, y, z)
-    float scale = 1.0f;
+    float scale = 2.0f; // Make portals visible enough
     std::memcpy(&args[10], &scale, sizeof(float));
     std::memcpy(&args[11], &scale, sizeof(float));
     std::memcpy(&args[12], &scale, sizeof(float));
@@ -116,6 +175,26 @@ void PortalManager::DrawPortal(const Portal& portal, int r, int g, int b) {
 }
 
 void PortalManager::Update() {
+    lsa::runtime::NativeContext ctx{};
+
+    // Check if player pressed Attack (Control 24) to shoot Blue Portal
+    ctx.arg_count = 2;
+    uint64_t attackArgs[2] = {0, 24}; // 0 = Player control group, 24 = Attack
+    ctx.args = attackArgs;
+    lsa::runtime::Invoke(0x580417101DDB492F, &ctx); // IS_CONTROL_JUST_PRESSED
+    if (reinterpret_cast<uint64_t>(ctx.return_value) != 0) {
+        ShootPortal(true);
+    }
+
+    // Check if player pressed Aim (Control 25) to shoot Orange Portal
+    ctx.arg_count = 2;
+    uint64_t aimArgs[2] = {0, 25}; // 0 = Player control group, 25 = Aim
+    ctx.args = aimArgs;
+    lsa::runtime::Invoke(0x580417101DDB492F, &ctx); // IS_CONTROL_JUST_PRESSED
+    if (reinterpret_cast<uint64_t>(ctx.return_value) != 0) {
+        ShootPortal(false);
+    }
+
     if (bluePortal.active) {
         DrawPortal(bluePortal, 0, 0, 255); // Blue
     }
