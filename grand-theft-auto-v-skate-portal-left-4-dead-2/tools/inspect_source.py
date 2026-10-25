@@ -23,7 +23,7 @@ class Vpk:
         def string():
             nonlocal cursor
             end = tree.index(0, cursor)
-            s = tree[cursor:end].decode('utf-8')
+            s = tree[cursor:end].decode('utf-8', errors='surrogateescape')
             cursor = end + 1
             return s
         while extension := string():

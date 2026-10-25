@@ -1,0 +1,550 @@
+{
+  "schemaVersion": 1,
+  "name": "source_assets",
+  "columns": [
+    "id",
+    "mount",
+    "kind",
+    "path",
+    "inspection"
+  ],
+  "rows": [
+    {
+      "id": "portal_world_gun",
+      "mount": "portal",
+      "kind": "model",
+      "path": "models/weapons/w_portalgun.mdl",
+      "inspection": "CRC and header verified in memory; C++/rendering audit separate"
+    },
+    {
+      "id": "portal_view_gun",
+      "mount": "portal",
+      "kind": "model",
+      "path": "models/weapons/v_portalgun.mdl",
+      "inspection": "CRC and header verified in memory; C++/rendering audit separate"
+    },
+    {
+      "id": "portal_blue_shot",
+      "mount": "portal",
+      "kind": "wave",
+      "path": "sound/weapons/portalgun/portalgun_shoot_blue1.wav",
+      "inspection": "CRC and header verified in memory; C++/rendering audit separate"
+    },
+    {
+      "id": "portal2_view_gun",
+      "mount": "portal2",
+      "kind": "model",
+      "path": "models/weapons/v_portalgun.mdl",
+      "inspection": "CRC and header verified in memory; C++/rendering audit separate"
+    },
+    {
+      "id": "portal2_world_gun",
+      "mount": "portal2",
+      "kind": "model",
+      "path": "models/weapons/w_portalgun.mdl",
+      "inspection": "CRC and header verified in memory; C++/rendering audit separate"
+    },
+    {
+      "id": "portal2_blue_shot",
+      "mount": "portal2",
+      "kind": "wave",
+      "path": "sound/weapons/portalgun/wpn_portal_gun_fire_blue_01.wav",
+      "inspection": "CRC and header verified in memory; C++/rendering audit separate"
+    },
+    {
+      "id": "portal2_orange_shot",
+      "mount": "portal2",
+      "kind": "wave",
+      "path": "sound/weapons/portalgun/wpn_portal_gun_fire_red_01.wav",
+      "inspection": "CRC and header verified in memory; C++/rendering audit separate"
+    },
+    {
+      "id": "portal2_enter",
+      "mount": "portal2",
+      "kind": "wave",
+      "path": "sound/weapons/portalgun/portal_enter_01.wav",
+      "inspection": "CRC and header verified in memory; C++/rendering audit separate"
+    },
+    {
+      "id": "l4d2_tank",
+      "mount": "l4d2",
+      "kind": "model",
+      "path": "models/infected/hulk.mdl",
+      "inspection": "CRC and header verified in memory; C++/rendering audit separate"
+    },
+    {
+      "id": "l4d2_common",
+      "mount": "l4d2",
+      "kind": "model",
+      "path": "models/infected/common_male_tshirt_cargos.mdl",
+      "inspection": "CRC and header verified in memory; C++/rendering audit separate"
+    },
+    {
+      "id": "l4d2_pistol",
+      "mount": "l4d2",
+      "kind": "model",
+      "path": "models/w_models/weapons/w_pistol_a.mdl",
+      "inspection": "CRC and header verified in memory; C++/rendering audit separate"
+    },
+    {
+      "id": "l4d2_tank_voice",
+      "mount": "l4d2",
+      "kind": "wave",
+      "path": "sound/player/tank/voice/attack/tank_attack_01.wav",
+      "inspection": "CRC and header verified in memory; C++/rendering audit separate"
+    }
+  ],
+  "checks": {
+    "portal_world_gun": {
+      "id": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "mount": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "kind": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "path": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "inspection": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      }
+    },
+    "portal_view_gun": {
+      "id": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "mount": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "kind": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "path": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "inspection": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      }
+    },
+    "portal_blue_shot": {
+      "id": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "mount": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "kind": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "path": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "inspection": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      }
+    },
+    "portal2_view_gun": {
+      "id": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "mount": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "kind": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "path": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "inspection": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      }
+    },
+    "portal2_world_gun": {
+      "id": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "mount": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "kind": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "path": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "inspection": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      }
+    },
+    "portal2_blue_shot": {
+      "id": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "mount": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "kind": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "path": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "inspection": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      }
+    },
+    "portal2_orange_shot": {
+      "id": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "mount": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "kind": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "path": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "inspection": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      }
+    },
+    "portal2_enter": {
+      "id": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "mount": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "kind": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "path": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "inspection": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      }
+    },
+    "l4d2_tank": {
+      "id": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "mount": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "kind": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "path": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "inspection": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      }
+    },
+    "l4d2_common": {
+      "id": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "mount": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "kind": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "path": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "inspection": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      }
+    },
+    "l4d2_pistol": {
+      "id": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "mount": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "kind": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "path": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "inspection": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      }
+    },
+    "l4d2_tank_voice": {
+      "id": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "mount": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "kind": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "path": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "inspection": {
+        "status": "verified",
+        "evidence": "Selected installed path read with archive CRC or loose RIFF validation; metadata in source-inspection.json",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      }
+    }
+  },
+  "references": [
+    {
+      "column": "mount",
+      "sheet": "source_mounts",
+      "target": "id"
+    }
+  ]
+}

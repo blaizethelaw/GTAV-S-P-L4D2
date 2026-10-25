@@ -55,11 +55,13 @@ inline constexpr NativeSpec kNatives[] = {
     {"NETWORK_IS_GAME_IN_PROGRESS", 0x10FAB35428CCC9D7ULL, 0U, "guard"},
     {"NETWORK_IS_SESSION_ACTIVE", 0xD83C2B94E7508980ULL, 0U, "guard"},
     {"GET_GAME_TIMER", 0x9CD27B0045628463ULL, 0U, "clock"},
+    {"GET_FRAME_COUNT", 0xFC8202EFC642E6F2ULL, 0U, "clock"},
+    {"GET_THIS_SCRIPT_NAME", 0x442E0A7EDE4A738AULL, 0U, "script"},
 };
 inline constexpr size_t kNativeCount = sizeof(kNatives) / sizeof(kNatives[0]);
 struct ProbeSetting { const char* id; const char* value; };
 inline constexpr ProbeSetting kSettings[] = {
-    {"probe_id", "NativeDump-3889-v2-dev-only"},
+    {"probe_id", "NativeDump-3889-v3-dev-only"},
     {"game_version", "1.0.3889.0"},
     {"game_timestamp", "1783602899"},
     {"game_image_size", "65387520"},

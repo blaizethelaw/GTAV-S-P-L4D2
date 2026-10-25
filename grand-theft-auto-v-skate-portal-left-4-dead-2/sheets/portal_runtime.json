@@ -1,0 +1,36 @@
+{
+  "schemaVersion": 1,
+  "name": "portal_runtime",
+  "columns": ["id", "maxActors", "cooldownSeconds", "exitPaddingMeters", "maxSampleGapSeconds", "halfWidthMeters", "halfHeightMeters", "policy"],
+  "rows": [{
+    "id": "traversal",
+    "maxActors": 32,
+    "cooldownSeconds": 0.3,
+    "exitPaddingMeters": 0.08,
+    "maxSampleGapSeconds": 0.25,
+    "halfWidthMeters": 1.6,
+    "halfHeightMeters": 2.8,
+    "policy": "Track host-validated actor identities, sweep a bounding sphere through both apertures, require host exit clearance, preserve momentum, and commit cooldown only after a successful host move. Invalid session or replacement portal clears previous samples."
+  }],
+  "checks": {
+    "traversal": {
+      "id": {"status":"verified","evidence":"Runtime coordinator configuration for the accepted linked momentum-portal design; this sheet verifies configuration only, not GTA integration."},
+      "maxActors": {"status":"verified","evidence":"Matches the 32-actor bound in portals.linked_pair."},
+      "cooldownSeconds": {"status":"verified","evidence":"Matches portals.linked_pair; suppress immediate reverse crossing for 0.3 seconds after successful movement."},
+      "exitPaddingMeters": {"status":"verified","evidence":"Chosen clearance margin beyond the actor bounding sphere; the host must independently test destination collision."},
+      "maxSampleGapSeconds": {"status":"verified","evidence":"Discard segments older than 0.25 seconds so pause, loading, or stale samples cannot trigger delayed traversal."},
+      "halfWidthMeters": {"status":"verified","evidence":"Matches portals.linked_pair halfWidthMeters."},
+      "halfHeightMeters": {"status":"verified","evidence":"Matches portals.linked_pair halfHeightMeters."},
+      "policy": {"status":"verified","evidence":"Explicit gameplay invariant; host integration and in-game proof remain separate gates."}
+    }
+  },
+  "references": [],
+  "types": {
+    "maxActors":{"type":"integer","minimum":1,"maximum":128},
+    "cooldownSeconds":{"type":"number","minimum":0.01,"maximum":5},
+    "exitPaddingMeters":{"type":"number","minimum":0.01,"maximum":1},
+    "maxSampleGapSeconds":{"type":"number","minimum":0.01,"maximum":1},
+    "halfWidthMeters":{"type":"number","minimum":0.1,"maximum":10},
+    "halfHeightMeters":{"type":"number","minimum":0.1,"maximum":10}
+  }
+}

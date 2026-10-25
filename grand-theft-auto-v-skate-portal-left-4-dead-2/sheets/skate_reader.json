@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 1,
+  "name": "skate_reader",
+  "columns": ["id", "sourceToc", "bundleName", "assetPrefix", "installGroup", "decoderFile", "maxPayloadBytes", "maxCatalogEntries", "maxStringBytes", "validation", "contentPolicy"],
+  "rows": [{
+    "id": "scorable_catalog",
+    "sourceToc": "Data/Win32/levels/game/dingolevel_ftue_island/dingolevel_ftue_island.toc",
+    "bundleName": "win32/levels/game/dingolevel_ftue_island/dingolevel_ftue_island",
+    "assetPrefix": "gameplay/scorables/",
+    "installGroup": 3162564249,
+    "decoderFile": "oo2core_9_win64.dll",
+    "maxPayloadBytes": 67108864,
+    "maxCatalogEntries": 4096,
+    "maxStringBytes": 4096,
+    "validation": "Reject malformed RIFF boundaries, unsupported schemas, fields extending outside their instance, overflowing relative pointers, duplicate catalog records and excessive counts. Preserve all scalar rule values from installed EBX.",
+    "contentPolicy": "Read selected EBX and its installed decoder directly from the companion installation. Keep rules in memory; never write extracted game content or a trick catalog."
+  }],
+  "checks": {
+    "scorable_catalog": {
+      "id": {"status": "verified", "evidence": "Unique reader configuration identifier; no game catalog values are embedded."},
+      "sourceToc": {"status": "verified", "evidence": "Installed-file diagnostic on 2026-10-24 decoded 363 scorable records from this TOC."},
+      "bundleName": {"status": "verified", "evidence": "Installed-file diagnostic found this bundle and decoded 363 scorable records."},
+      "assetPrefix": {"status": "verified", "evidence": "Bounded catalog scan selects this prefix from the installed bundle manifest."},
+      "installGroup": {"status": "verified", "evidence": "Installed-file diagnostic resolved every selected scorable to this install group."},
+      "decoderFile": {"status": "verified", "evidence": "Installed-file diagnostic successfully used the decoder in the player's skate installation, in place."},
+      "maxPayloadBytes": {"status": "verified", "evidence": "Deliberate parser resource budget of 64 MiB per payload; specifies the bound, not in-game performance."},
+      "maxCatalogEntries": {"status": "verified", "evidence": "Deliberate result budget; the audited installed catalog contains 363 records below this cap."},
+      "maxStringBytes": {"status": "verified", "evidence": "Deliberate metadata-string budget; all audited records fit below this cap."},
+      "validation": {"status": "verified", "evidence": "Parser validation contract for source implementation and diagnostic tests; gameplay remains separately unverified."},
+      "contentPolicy": {"status": "verified", "evidence": "Creator requires in-place companion reads and no copied game content; reader exposes no write/cache API."}
+    }
+  }
+}

@@ -1,11 +1,11 @@
 #include "portal_math.hpp"
-#include "portal_math.hpp"
+#include "../generated/portal_math.hpp"
 
 #include <cmath>
 
 namespace lsa::portal {
 namespace {
-constexpr double epsilon = 1e-06;
+constexpr double epsilon = sheets::portal_math::rigid_transform::epsilon;
 bool finite(Vec3 v) noexcept {
     return std::isfinite(v.x) && std::isfinite(v.y) && std::isfinite(v.z);
 }
@@ -84,7 +84,7 @@ std::optional<Crossing> crossing(const Frame& frame, Aperture aperture,
     const double before = dot(previous-frame.center, frame.normal);
     const double after = dot(current-frame.center, frame.normal);
     if (!std::isfinite(before) || !std::isfinite(after)
-        || before <= 1e-06 || after > 0.0) return std::nullopt;
+        || before <= sheets::portal_math::crossing::epsilon || after > 0.0) return std::nullopt;
     const double t = before / (before-after);
     if (!std::isfinite(t) || t < 0.0 || t > 1.0) return std::nullopt;
     Vec3 hit = previous+(current-previous)*t;

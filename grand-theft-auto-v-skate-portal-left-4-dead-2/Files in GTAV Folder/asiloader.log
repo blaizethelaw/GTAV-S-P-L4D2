@@ -1,0 +1,12 @@
+// GTA V ASI LOADER (build May  2 2015)
+//     (C) Alexander Blade 2015
+LIB: "C:\WINDOWS\system32\dinput8.dll" => 00007FFEB8B50000
+API: "DirectInput8Create" => 00007FFEB8B611E0
+API: "DllCanUnloadNow" => 00007FFEB8B731B0
+API: "DllGetClassObject" => 00007FFEB8B6A540
+API: "DllRegisterServer" => 00007FFEB8B7A850
+API: "DllUnregisterServer" => 00007FFEB8B7AAD0
+LOADER: Loading *.asi plugins
+ASI: Loading "E:\C Backup\Steam\steamapps\common\Grand Theft Auto V\NativeDump.asi"
+     "NativeDump.asi" => 00007FFEB86C0000
+LOADER: Finished loading *.asi plugins

@@ -3,7 +3,7 @@ import unittest
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "tools"))
-from import_native_probe import parse_capture
+from import_native_probe import parse_capture, validate_capture_counts
 
 
 class NativeCaptureValidation(unittest.TestCase):
@@ -30,6 +30,25 @@ class NativeCaptureValidation(unittest.TestCase):
                       self.valid.split("PLAYER_PED_ID")[0]):
             with self.subTest(value=value), self.assertRaises(ValueError):
                 parse_capture(value, self.sections)
+
+    def test_count_includes_independent_sentinel_lookups(self):
+        # v2 inventories 52 rows; v3 adds the frame and script-name natives.
+        for native_count in (52, 54):
+            with self.subTest(native_count=native_count):
+                validate_capture_counts({"nativeCount": native_count,
+                                         "resolvedCount": native_count,
+                                         "executableMemoryChecks": native_count + 2}, native_count)
+
+    def test_missing_extra_and_partial_checks_rejected(self):
+        for checks in (0, 54, 55, 57):
+            with self.subTest(checks=checks), self.assertRaisesRegex(ValueError, "preliminary sentinel"):
+                validate_capture_counts({"nativeCount": 54, "resolvedCount": 54,
+                                         "executableMemoryChecks": checks}, 54)
+        for field in ("nativeCount", "resolvedCount"):
+            manifest = {"nativeCount": 54, "resolvedCount": 54, "executableMemoryChecks": 56}
+            manifest[field] = 53
+            with self.subTest(field=field), self.assertRaisesRegex(ValueError, "Native counts"):
+                validate_capture_counts(manifest, 54)
 
 
 if __name__ == "__main__":
