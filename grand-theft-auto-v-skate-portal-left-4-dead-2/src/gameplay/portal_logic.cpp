@@ -19,7 +19,7 @@ void PortalManager::ShootPortal(bool isBlue) {
 
     float camCoord[3];
     if (ctx.return_value) {
-        std::memcpy(camCoord, ctx.return_value, sizeof(float)*3);
+        std::memcpy(camCoord, ctx.return_value, sizeof(float) * 3);
     } else {
         camCoord[0] = 0; camCoord[1] = 0; camCoord[2] = 0;
     }
@@ -32,7 +32,7 @@ void PortalManager::ShootPortal(bool isBlue) {
 
     float camRot[3];
     if (ctx.return_value) {
-        std::memcpy(camRot, ctx.return_value, sizeof(float)*3);
+        std::memcpy(camRot, ctx.return_value, sizeof(float) * 3);
     } else {
         camRot[0] = 0; camRot[1] = 0; camRot[2] = 0;
     }
@@ -203,17 +203,17 @@ void PortalManager::Update() {
     }
 
     if (bluePortal.active && orangePortal.active) {
-        lsa::runtime::NativeContext ctx{};
-        ctx.arg_count = 0;
-        lsa::runtime::Invoke(0xD80958FC74E988A6, &ctx); // PLAYER_PED_ID
-        uint64_t playerPed = reinterpret_cast<uint64_t>(ctx.return_value);
+        lsa::runtime::NativeContext pedCtx{};
+        pedCtx.arg_count = 0;
+        lsa::runtime::Invoke(0xD80958FC74E988A6, &pedCtx); // PLAYER_PED_ID
+        uint64_t playerPed = reinterpret_cast<uint64_t>(pedCtx.return_value);
 
-        ctx.arg_count = 2;
+        pedCtx.arg_count = 2;
         uint64_t posArgs[2] = {playerPed, 1}; // entity, alive
-        ctx.args = posArgs;
-        lsa::runtime::Invoke(0x3FEF770D40960D5A, &ctx); // GET_ENTITY_COORDS
+        pedCtx.args = posArgs;
+        lsa::runtime::Invoke(0x3FEF770D40960D5A, &pedCtx); // GET_ENTITY_COORDS
 
-        // (Stub: Read ctx.return_value as Vector3, compare against portal.frame.center)
+        // (Stub: Read pedCtx.return_value as Vector3, compare against portal.frame.center)
         // (Stub: Apply transformMotion if crossing occurs and SET_ENTITY_COORDS)
     }
 }

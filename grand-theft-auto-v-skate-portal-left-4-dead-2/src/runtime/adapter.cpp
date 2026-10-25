@@ -41,43 +41,8 @@ void Initialize(void* module_handle) {
     g_waitTarget = Scanner::FindPattern("\x48\x89\x5C\x24\x08\x57\x48\x83\xEC\x20\x8B\xD9\x8B\xFA", "xxxxxxxxxxxxxx");
 
     if (!g_waitTarget) {
+        // GTA V 1.0.3889 WAIT RVA fallback
         g_waitTarget = g_gameBase + 0x1678AC8;
     }
 
-    if (MH_CreateHook(reinterpret_cast<void*>(g_waitTarget), reinterpret_cast<void*>(&HookedWait), reinterpret_cast<void**>(&g_originalWait)) == MH_OK) {
-        MH_EnableHook(reinterpret_cast<void*>(g_waitTarget));
-        g_isReady = true;
-    }
-}
-
-bool IsReady() {
-    return g_isReady;
-}
-
-void Invoke(NativeHash hash, NativeContext* ctx) {
-    if (!g_nativeRegistration) {
-        g_nativeRegistration = reinterpret_cast<NativeInitFn>(Scanner::FindPattern("\x48\x8D\x0D\x00\x00\x00\x00\xE8\x00\x00\x00\x00\x48\x8B\xC8", "xxx????x????xxx"));
-    }
-
-    if (g_nativeRegistration) {
-        NativeRegistrationHandler handler = g_nativeRegistration(hash);
-        if (handler) {
-            handler(ctx);
-        }
-    }
-}
-
-void SetTick(std::function<void()> callback) {
-    std::lock_guard<std::mutex> lock(g_tickMutex);
-    g_tickCallbacks.push_back(callback);
-}
-
-void Shutdown() {
-    g_isReady = false;
-    if (g_waitTarget) {
-        MH_DisableHook(reinterpret_cast<void*>(g_waitTarget));
-    }
-    MH_Uninitialize();
-}
-
-} // namespace lsa::runtime
+    if (MH_CreateHook(reinterpret_cast<void*>(g_waitTarget), reinterpret_cast<void*>(&HookedWait), reinterpret_cast<void**>(&g_originalWait)) == MH_OK)
