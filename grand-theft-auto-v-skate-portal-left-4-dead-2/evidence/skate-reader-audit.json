@@ -1,0 +1,33 @@
+{
+  "date": "2026-10-24",
+  "scope": "Compiled standalone content-reader diagnostic, not GTA gameplay or a release build",
+  "result": "pass",
+  "installedGame": "skate.",
+  "sourceToc": "Data/Win32/levels/game/dingolevel_ftue_island/dingolevel_ftue_island.toc",
+  "sourceTocBytes": 1713451,
+  "decoderFile": "oo2core_9_win64.dll",
+  "decoderBytes": 639872,
+  "decodedScorableRecords": 363,
+  "distinctCategories": 20,
+  "variedScores": true,
+  "persistedGameContent": false,
+  "checks": [
+    "Synthetic original EBX fixture decodes expected names, scores, enums and booleans",
+    "Every truncation of synthetic fixture is rejected",
+    "Scalar field crossing the declared instance boundary is rejected",
+    "INT64_MIN and INT64_MAX relative string pointers are rejected without overflow",
+    "Odd RIFF chunk missing padding is rejected",
+    "Parent traversal and absolute source paths are rejected",
+    "Installed catalog records have unique source identities, valid names and nonnegative scores",
+    "Production convenience API uses generated sheet paths"
+  ],
+  "sourceSha256": "3a6cbf06a5abd4ab6cb26885aefd621835da0efc9dc779f82701859f6b2eb740",
+  "testSha256": "66f9d57ceeafba57ff1547ee0ba828f2aa98801b379745027118fe453573eba7",
+  "sheetSha256": "c36c73ad132b83dba7091af0f394b18601aaa267eddf2a080c3fb78db547dc7c",
+  "remaining": [
+    "GTA skate movement and trick recognition integration",
+    "Board mesh and texture decoder/rendering",
+    "Board event audio reader/playback",
+    "In-game verification"
+  ]
+}

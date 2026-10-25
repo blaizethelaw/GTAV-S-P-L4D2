@@ -479,6 +479,24 @@
         "purpose": "clock",
         "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
         "status": "verified-inventory"
+      },
+      {
+        "id": "GET_FRAME_COUNT",
+        "namespace": "MISC",
+        "hash": "0xFC8202EFC642E6F2",
+        "expectedRva": "capture-only",
+        "purpose": "clock",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
+      },
+      {
+        "id": "GET_THIS_SCRIPT_NAME",
+        "namespace": "SCRIPT",
+        "hash": "0x442E0A7EDE4A738A",
+        "expectedRva": "capture-only",
+        "purpose": "script",
+        "evidence": "Local alloc8or header-derived natives.json; hash inventory checked against downloaded SHV table. Address not known: diagnostic only.",
+        "status": "verified-inventory"
       }
     ]
   },
@@ -492,7 +510,7 @@
     "rows": [
       {
         "id": "probe_id",
-        "value": "NativeDump-3889-v2-dev-only",
+        "value": "NativeDump-3889-v3-dev-only",
         "evidence": "Current local PE metadata and inspected SHV resolver ABI; development-only requirements.",
         "status": "verified-inventory"
       },

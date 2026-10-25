@@ -1,0 +1,86 @@
+{
+  "schemaVersion": 1,
+  "name": "source_limits",
+  "columns": [
+    "id",
+    "maxPayloadBytes",
+    "maxTreeBytes",
+    "maxEntries",
+    "maxInventory",
+    "maxMaterialDepth",
+    "maxMaterialBytes",
+    "maxWaveSeconds"
+  ],
+  "rows": [
+    {
+      "id": "bounded_reader",
+      "maxPayloadBytes": 268435456,
+      "maxTreeBytes": 67108864,
+      "maxEntries": 1000000,
+      "maxInventory": 256,
+      "maxMaterialDepth": 8,
+      "maxMaterialBytes": 1048576,
+      "maxWaveSeconds": 120
+    }
+  ],
+  "checks": {
+    "bounded_reader": {
+      "id": {
+        "status": "verified",
+        "evidence": "Explicit finite resource caps for hostile/truncated input; parser rejection tests validate enforcement",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "maxPayloadBytes": {
+        "status": "verified",
+        "evidence": "Explicit finite resource caps for hostile/truncated input; parser rejection tests validate enforcement",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "maxTreeBytes": {
+        "status": "verified",
+        "evidence": "Explicit finite resource caps for hostile/truncated input; parser rejection tests validate enforcement",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "maxEntries": {
+        "status": "verified",
+        "evidence": "Explicit finite resource caps for hostile/truncated input; parser rejection tests validate enforcement",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "maxInventory": {
+        "status": "verified",
+        "evidence": "Explicit finite resource caps for hostile/truncated input; parser rejection tests validate enforcement",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "maxMaterialDepth": {
+        "status": "verified",
+        "evidence": "Explicit finite resource caps for hostile/truncated input; parser rejection tests validate enforcement",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "maxMaterialBytes": {
+        "status": "verified",
+        "evidence": "Explicit finite resource caps for hostile/truncated input; parser rejection tests validate enforcement",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "maxWaveSeconds": {
+        "status": "verified",
+        "evidence": "Explicit finite resource caps for hostile/truncated input; parser rejection tests validate enforcement",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      }
+    }
+  }
+}

@@ -3,6 +3,7 @@
 #include <array>
 #include <cstdint>
 #include <filesystem>
+#include <memory>
 #include <stdexcept>
 #include <string>
 #include <unordered_map>
@@ -14,11 +15,19 @@ namespace lsc::content {
 using Bytes = std::vector<std::uint8_t>;
 struct ContentError : std::runtime_error { using std::runtime_error::runtime_error; };
 
-class VpkArchive {
+class SourceContent {
+public:
+    virtual ~SourceContent() = default;
+    virtual bool contains(const std::string& virtualPath) const = 0;
+    virtual Bytes read(const std::string& virtualPath) const = 0;
+};
+
+class VpkArchive final : public SourceContent {
 public:
     explicit VpkArchive(const std::filesystem::path& directoryFile);
-    bool contains(const std::string& virtualPath) const;
-    Bytes read(const std::string& virtualPath) const; // validates complete-file CRC32
+    bool contains(const std::string& virtualPath) const override;
+    Bytes read(const std::string& virtualPath) const override; // validates complete-file CRC32
+    std::vector<std::string> inventory(const std::string& prefix, std::size_t limit = 64) const;
     std::size_t size() const noexcept { return entries_.size(); }
 private:
     struct Entry {
@@ -31,11 +40,29 @@ private:
     std::unordered_map<std::string, Entry> entries_;
 };
 
+enum class SourceGame { Portal, Portal2, Left4Dead2 };
+// Official archive mounts only, in the sheet's patch/DLC/base precedence order.
+// Loose game sounds are read in place; custom/addons are never scanned. No game
+// DLL is loaded and no files are cached or written into either installation.
+class SourceInstallation final : public SourceContent {
+public:
+    SourceInstallation(const std::filesystem::path& gameRoot, SourceGame game);
+    bool contains(const std::string& virtualPath) const override;
+    Bytes read(const std::string& virtualPath) const override;
+    std::size_t archiveCount() const noexcept;
+    SourceGame game() const noexcept { return game_; }
+private:
+    struct Mount { std::unique_ptr<VpkArchive> archive; std::filesystem::path looseRoot; };
+    std::filesystem::path gameRoot_;
+    SourceGame game_;
+    std::vector<Mount> mounts_;
+};
+
 // Only a relative game-content path is accepted; canonicalization also prevents
 // symlink/reparse-point escape. Nothing is written to the companion folder.
 Bytes readLoose(const std::filesystem::path& contentRoot, const std::string& virtualPath);
 
-enum class VtxLayout { Left4Dead2, Portal2 };
+enum class VtxLayout { Portal, Left4Dead2, Portal2 };
 struct Vertex {
     std::array<float, 3> position{}, normal{}, weights{};
     std::array<float, 2> uv{};
@@ -65,7 +92,7 @@ struct Model {
 Model decodeModel(const Bytes& mdl, const Bytes& vvd, const Bytes& vtx,
                   VtxLayout layout, unsigned skin = 0,
                   const std::vector<unsigned>& bodySelections = {});
-Model loadModel(const VpkArchive&, const std::string& mdlPath,
+Model loadModel(const SourceContent&, const std::string& mdlPath,
                 VtxLayout layout, unsigned skin = 0,
                 const std::vector<unsigned>& bodySelections = {});
 
@@ -81,5 +108,14 @@ struct Material {
     Texture baseTexture;
 };
 Texture decodeVtf(const Bytes&);
-Material loadMaterial(const VpkArchive&, const std::string& vmtPath);
+Material loadMaterial(const SourceContent&, const std::string& vmtPath);
+
+// PCM audio ready for an in-memory sound backend. Unsupported codecs fail
+// explicitly; no executable or external conversion process is started.
+struct WaveAudio {
+    unsigned channels{}, sampleRate{}, bitsPerSample{}, frames{};
+    Bytes pcm;
+};
+WaveAudio decodeWave(const Bytes&);
+WaveAudio loadWave(const SourceContent&, const std::string& wavPath);
 } // namespace lsc::content

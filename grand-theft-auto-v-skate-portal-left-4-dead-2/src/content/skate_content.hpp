@@ -24,4 +24,9 @@ std::optional<SkateTrick> decodeSkateScorable(const Bytes& ebx,
 std::vector<SkateTrick> loadSkateScorables(const std::filesystem::path& gameRoot,
                                         const std::string& sourceToc,
                                         const std::string& bundleName);
+
+// Production convenience overload uses generated, preflighted sheet values.
+// The caller retains the returned catalog only in memory and uses the actual
+// base/continuous scores for its selected trick; there is no fallback roster.
+std::vector<SkateTrick> loadSkateScorables(const std::filesystem::path& gameRoot);
 } // namespace lsc::content

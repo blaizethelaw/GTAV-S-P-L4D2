@@ -1,4 +1,5 @@
 #include "skate_content.hpp"
+#include "../generated/skate_reader.hpp"
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #include <algorithm>
@@ -6,10 +7,12 @@
 #include <cstring>
 #include <map>
 #include <set>
+#include <limits>
 
 namespace lsc::content {
 namespace {
-constexpr std::size_t MaxBytes=64u*1024u*1024u;
+using Config = lsa::sheets::skate_reader::scorable_catalog;
+constexpr std::size_t MaxBytes=Config::maxPayloadBytes;
 struct V {
     const Bytes& b;
     void bounds(std::uint64_t p,std::uint64_t n) const {
@@ -26,7 +29,7 @@ struct V {
         auto x=u32(p);if(x>max)throw ContentError("Excessive skate count");return x;
     }
     Bytes bytes(std::size_t p,std::size_t n)const{bounds(p,n);return Bytes(b.begin()+p,b.begin()+p+n);}
-    std::string str(std::size_t p,std::size_t max=4096)const{
+    std::string str(std::size_t p,std::size_t max=Config::maxStringBytes)const{
         bounds(p,1);std::string s;
         while(p<b.size()&&s.size()<max){auto c=b[p++];if(!c)return s;if(c<32||c>126)throw ContentError("Non-ASCII skate metadata");s.push_back(char(c));}
         throw ContentError("Unterminated skate string");
@@ -52,7 +55,7 @@ struct Chunk {std::size_t at{},size{};};
 std::map<std::string,Chunk> riff(const Bytes& b){
     V v{b};if(v.u32(0)!=0x46464952||v.u32(8)!=0x00584245||std::uint64_t(v.u32(4))+8!=b.size())throw ContentError("Unsupported skate EBX container");
     std::map<std::string,Chunk> chunks;
-    for(std::size_t p=12;p<b.size();){v.bounds(p,8);std::string id(b.begin()+p,b.begin()+p+4);auto n=v.u32(p+4);v.bounds(p+8,n);if(!chunks.emplace(id,Chunk{p+8,n}).second)throw ContentError("Duplicate EBX chunk");p+=8+n+(n&1);}
+    for(std::size_t p=12;p<b.size();){v.bounds(p,8);std::string id(b.begin()+p,b.begin()+p+4);auto n=v.u32(p+4);v.bounds(p+8,std::uint64_t(n)+(n&1));if(!chunks.emplace(id,Chunk{p+8,n}).second)throw ContentError("Duplicate EBX chunk");p+=8+std::size_t(n)+(n&1);}
     return chunks;
 }
 struct Type {std::uint32_t hash;std::size_t first,count;std::uint16_t flags,size,align;};
@@ -79,7 +82,7 @@ struct Reflection {
         const auto& t=types[type];
         for(std::size_t i=t.first;i<t.first+t.count;++i){const auto& f=fields[i];
             if(f.flags==0&&name(f.hash).empty()){
-                auto sub=find(f.type,n,depth+1);if(sub){sub->offset+=f.offset;return sub;}
+                auto sub=find(f.type,n,depth+1);if(sub){if(f.offset>std::numeric_limits<std::uint32_t>::max()-sub->offset)throw ContentError("Overflowing EBX inheritance offset");sub->offset+=f.offset;return sub;}
             }else if(name(f.hash)==n)return f;
         }return std::nullopt;
     }
@@ -105,7 +108,7 @@ std::vector<Loc> locations(const Bytes& b){
     }return out;
 }
 Bytes readCas(const std::filesystem::path& root,const Loc& l){
-    if(l.patch||l.install!=3162564249u)throw ContentError("Unsupported skate install group");
+    if(l.patch||l.install!=Config::installGroup)throw ContentError("Unsupported skate install group");
     auto n=std::to_string(l.archive);if(n.size()<2)n="0"+n;
     return range(within(root,"Data/Win32/configurations/layout/initialinstallpackage/cas_"+n+".cas"),l.offset,l.size);
 }
@@ -120,7 +123,7 @@ struct Decoder {
             if(expanded>MaxBytes-out.size())throw ContentError("Skate decode limit exceeded");
             auto dst=out.size();out.resize(dst+std::size_t(expanded));
             if(codec==0){if(n!=expanded)throw ContentError("Invalid raw CAS block");std::copy_n(b.data()+p,std::size_t(n),out.data()+dst);}
-            else if(codec==0x11||codec==0x15||codec==0x19){if(!dll){auto path=within(root,"oo2core_9_win64.dll");dll=LoadLibraryExW(path.c_str(),nullptr,LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR|LOAD_LIBRARY_SEARCH_SYSTEM32);if(!dll)throw ContentError("Cannot load installed skate decoder");auto proc=GetProcAddress(dll,"OodleLZ_Decompress");static_assert(sizeof(proc)==sizeof(fn));std::memcpy(&fn,&proc,sizeof(fn));if(!fn)throw ContentError("Installed decoder lacks OodleLZ_Decompress");}
+            else if(codec==0x11||codec==0x15||codec==0x19){if(!dll){auto path=within(root,Config::decoderFile);dll=LoadLibraryExW(path.c_str(),nullptr,LOAD_LIBRARY_SEARCH_DLL_LOAD_DIR|LOAD_LIBRARY_SEARCH_SYSTEM32);if(!dll)throw ContentError("Cannot load installed skate decoder");auto proc=GetProcAddress(dll,"OodleLZ_Decompress");static_assert(sizeof(proc)==sizeof(fn));std::memcpy(&fn,&proc,sizeof(fn));if(!fn)throw ContentError("Installed decoder lacks OodleLZ_Decompress");}
                 if(fn(b.data()+p,std::int64_t(n),out.data()+dst,std::int64_t(expanded),1,0,0,nullptr,0,nullptr,nullptr,nullptr,0,3)!=std::int64_t(expanded))throw ContentError("Skate decoder rejected block");
             }else throw ContentError("Unsupported skate CAS codec");p+=std::size_t(n);
         }return out;
@@ -138,6 +141,7 @@ std::string tocName(const Bytes& b,std::uint32_t offset){V v{b};auto names=v.u32
 } // namespace
 
 std::optional<SkateTrick> decodeSkateScorable(const Bytes& b,const std::string& source){
+    if(b.size()>MaxBytes||source.size()>std::size_t(Config::maxStringBytes))throw ContentError("Skate record exceeds memory budget");
     V v{b};auto chunks=riff(b);
     for(const auto* c:{"EBXD","EFIX","RFL2"})if(!chunks.count(c))throw ContentError("Missing skate EBX chunk");
     auto r=chunks.at("RFL2");Reflection reflection(v.bytes(r.at,r.size));
@@ -149,18 +153,19 @@ std::optional<SkateTrick> decodeSkateScorable(const Bytes& b,const std::string& 
     if(f.u32(p)!=1||f.u32(p+4)!=1)throw ContentError("Unsupported scorable instance count");
     p+=8;auto data=chunks.at("EBXD");auto base=((data.at+15)&~std::size_t(15))+f.u32(p);
     if(base<data.at||base+reflection.types[0].size>data.at+data.size)throw ContentError("Scorable instance outside EBXD");
-    auto field=[&](const char* name,std::uint16_t flags){auto x=reflection.find(0,name);if(!x||x->flags!=flags)throw ContentError("Unsupported skate property schema");if(x->offset>=reflection.types[0].size)throw ContentError("Scorable field outside instance");return *x;};
-    auto text=[&](const char* name){auto x=field(name,0xe0);auto at=base+x.offset;auto delta=static_cast<std::int64_t>(v.num(at,8));auto target=std::int64_t(at)+delta;if(target<std::int64_t(data.at)||target>=std::int64_t(data.at+data.size))throw ContentError("Scorable text outside EBXD");auto s=v.str(std::size_t(target));if(std::uint64_t(target)+s.size()>=data.at+data.size)throw ContentError("Scorable text exceeds EBXD");return s;};
-    auto integer=[&](const char* name){return std::int32_t(v.u32(base+field(name,0x200).offset));};
-    auto boolean=[&](const char* name){auto at=base+field(name,0x140).offset;auto n=v.num(at,1);if(n>1)throw ContentError("Invalid scorable boolean");return bool(n);};
-    auto enumeration=[&](const char* name){auto x=field(name,0x100);return reflection.enumName(x,v.u32(base+x.offset));};
+    auto field=[&](const char* name,std::uint16_t flags,std::size_t width){auto x=reflection.find(0,name);if(!x||x->flags!=flags)throw ContentError("Unsupported skate property schema");if(x->offset>reflection.types[0].size||width>reflection.types[0].size-x->offset)throw ContentError("Scorable field outside instance");return *x;};
+    auto text=[&](const char* name){auto x=field(name,0xe0,8);auto at=base+x.offset;auto raw=v.num(at,8);std::int64_t delta;std::memcpy(&delta,&raw,sizeof(delta));if(delta>std::int64_t(data.at+data.size)-std::int64_t(at)-1||delta<std::int64_t(data.at)-std::int64_t(at))throw ContentError("Scorable text outside EBXD");auto target=std::int64_t(at)+delta;auto s=v.str(std::size_t(target));if(std::uint64_t(target)+s.size()>=data.at+data.size)throw ContentError("Scorable text exceeds EBXD");return s;};
+    auto integer=[&](const char* name){return std::int32_t(v.u32(base+field(name,0x200,4).offset));};
+    auto boolean=[&](const char* name){auto at=base+field(name,0x140,1).offset;auto n=v.num(at,1);if(n>1)throw ContentError("Invalid scorable boolean");return bool(n);};
+    auto enumeration=[&](const char* name){auto x=field(name,0x100,4);return reflection.enumName(x,v.u32(base+x.offset));};
     SkateTrick out;out.sourceAsset=source;out.name=text("TrickName");out.baseScore=integer("BaseScoreValue");out.continuousScore=integer("ContinousScoreValue");out.category=enumeration("TrickCategory");out.difficulty=enumeration("Difficulty");out.continuous=boolean("Continuous");out.hidden=boolean("HideScoreAndScorableName");
     if(out.name.empty()||out.baseScore<0||out.continuousScore<0)throw ContentError("Invalid scorable values");
     return out;
 }
 
 std::vector<SkateTrick> loadSkateScorables(const std::filesystem::path& root,const std::string& sourceToc,const std::string& bundle){
-    auto path=within(root,sourceToc);auto raw=range(path,0,std::filesystem::file_size(path));V rv{raw};if(rv.u32(0,true)!=0x00d1ce01)throw ContentError("Unsupported skate TOC envelope");auto b=rv.bytes(556,raw.size()-556);V v{b};auto at=v.u32(4,true),count=v.u32(8,true);if(count>200000)throw ContentError("Excessive skate bundle count");v.bounds(at,std::uint64_t(count)*16);
+    if(sourceToc.size()>std::size_t(Config::maxStringBytes)||bundle.size()>std::size_t(Config::maxStringBytes))throw ContentError("Skate lookup exceeds string budget");
+    auto path=within(root,sourceToc);auto raw=range(path,0,std::filesystem::file_size(path));V rv{raw};rv.bounds(0,556);if(rv.u32(0,true)!=0x00d1ce01)throw ContentError("Unsupported skate TOC envelope");auto b=rv.bytes(556,raw.size()-556);V v{b};auto at=v.u32(4,true),count=v.u32(8,true);if(count>200000)throw ContentError("Excessive skate bundle count");v.bounds(at,std::uint64_t(count)*16);
     std::vector<Loc> locs;Bytes manifest;
     for(unsigned i=0;i<count;++i){auto p=at+i*16;if(tocName(b,v.u32(p,true))!=bundle)continue;auto size=v.u32(p+4,true);if(size>>30!=1)throw ContentError("Unsupported skate bundle storage");auto reg=v.bytes(std::size_t(v.num(p+8,8,true)),size&0x3fffffff);locs=locations(reg);V rr{reg};if(rr.u32(4,true))manifest=rr.bytes(rr.u32(0,true),rr.u32(4,true));break;}
     if(locs.empty())throw ContentError("Required skate bundle not found");
@@ -168,8 +173,11 @@ std::vector<SkateTrick> loadSkateScorables(const std::filesystem::path& root,con
     auto total=m.u32(8,be),ebx=m.u32(12,be),res=m.u32(16,be),chunks=m.u32(20,be),strings=m.u32(24,be);
     if(total>200000||std::uint64_t(ebx)+res+chunks!=total||locs.size()!=std::uint64_t(total)+(external?1:0))throw ContentError("Inconsistent skate manifest counts");
     std::size_t entries=36+std::size_t(total)*20;m.bounds(entries,std::uint64_t(ebx)*8);Decoder decoder(root);std::vector<SkateTrick> out;std::set<std::string> seen;
-    for(unsigned i=0;i<ebx;++i){auto p=entries+i*8;auto name=m.str(4+strings+m.u32(p,be));if(name.rfind("gameplay/scorables/",0)!=0)continue;auto decoded=decoder.decode(readCas(root,locs[i+(external?1:0)]));if(decoded.size()!=m.u32(p+4,be))throw ContentError("Scorable decoded size mismatch");auto trick=decodeSkateScorable(decoded,name);if(trick&&seen.insert(name).second)out.push_back(std::move(*trick));}
+    for(unsigned i=0;i<ebx;++i){auto p=entries+i*8;auto name=m.str(std::size_t(4)+strings+m.u32(p,be));if(name.compare(0,Config::assetPrefix.size(),Config::assetPrefix)!=0)continue;if(!seen.insert(name).second)throw ContentError("Duplicate scorable asset in bundle");auto decoded=decoder.decode(readCas(root,locs[i+(external?1:0)]));if(decoded.size()!=m.u32(p+4,be))throw ContentError("Scorable decoded size mismatch");auto trick=decodeSkateScorable(decoded,name);if(trick){if(out.size()>=std::size_t(Config::maxCatalogEntries))throw ContentError("Skate catalog exceeds memory budget");out.push_back(std::move(*trick));}}
     if(out.empty())throw ContentError("No skate trick rules in required bundle");
     return out;
+}
+std::vector<SkateTrick> loadSkateScorables(const std::filesystem::path& root){
+    return loadSkateScorables(root,std::string(Config::sourceToc),std::string(Config::bundleName));
 }
 } // namespace lsc::content
