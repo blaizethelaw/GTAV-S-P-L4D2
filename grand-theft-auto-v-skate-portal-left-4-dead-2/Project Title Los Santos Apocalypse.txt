@@ -68,9 +68,9 @@ No game launched, no windows touched, no files changed or copied.
 
 
 Used Join-Path and ConvertFrom-Json · Edited MODLOG.md · 1 more
-Melty has 
+Melty has
 Los Santos Outbreak
- and 
+ and
 Skate in GTA
  as partial starting points; your requested Script Hook setup needs a different loading route for one-click installation.
 
@@ -813,4 +813,3 @@ I'll pick up the toolbelt mashup from where it left off and check the project an
 
 Searched the files · Read MODLOG.md, hooks.json and gameplay.json
 Add a payment method to continue
-
