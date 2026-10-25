@@ -57,6 +57,15 @@ def parse_capture(text: str, executable_sections: list[dict]) -> list[dict]:
     return rows
 
 
+def validate_capture_counts(manifest: dict, native_count: int) -> None:
+    """Every inventory lookup and the preliminary sentinel lookups are checked."""
+    if manifest.get("nativeCount") != native_count or manifest.get("resolvedCount") != native_count:
+        raise ValueError("Native counts do not match the capture")
+    expected_checks = native_count + len(SENTINELS)
+    if manifest.get("executableMemoryChecks") != expected_checks:
+        raise ValueError("Capture did not verify every runtime target and preliminary sentinel")
+
+
 def inspect_capture(run: Path, executable: Path, probe: Path, shv: Path) -> dict:
     manifest = json.loads((run / "manifest.json").read_text(encoding="utf-8-sig"))
     if not (run / "done.txt").is_file() or manifest.get("status") != "passed":
@@ -70,10 +79,7 @@ def inspect_capture(run: Path, executable: Path, probe: Path, shv: Path) -> dict
             raise ValueError(f"Capture fingerprint mismatch: {field}")
     rows = parse_capture((run / "natives.csv").read_text(encoding="utf-8-sig"),
                          pe_sections(executable.read_bytes()))
-    if manifest.get("nativeCount") != len(rows) or manifest.get("resolvedCount") != len(rows):
-        raise ValueError("Native counts do not match the capture")
-    if manifest.get("executableMemoryChecks") != len(rows):
-        raise ValueError("Capture did not verify every runtime target's executable memory")
+    validate_capture_counts(manifest, len(rows))
     if manifest.get("launchGuard") != "-nobattleye required":
         raise ValueError("Capture does not attest to the required Story Mode launch")
     return {

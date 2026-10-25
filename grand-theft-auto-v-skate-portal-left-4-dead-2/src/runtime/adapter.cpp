@@ -10,10 +10,7 @@ namespace lsa::runtime {
 
 using WaitFn = void(__cdecl*)(uint32_t);
 using NativeRegistrationHandler = void(__cdecl*)(NativeContext*);
-
-// The pattern points to a function that initializes the native table or similar,
-// but we need to resolve the RIP-relative jump or extract the actual function pointer properly.
-// For safety, we will leave the Invoke stubbed for now until the exact hooking mechanism is robust.
+using NativeInitFn = NativeRegistrationHandler(__cdecl*)(uint64_t);
 
 static WaitFn g_originalWait = nullptr;
 static std::vector<std::function<void()>> g_tickCallbacks;
@@ -21,7 +18,7 @@ static std::mutex g_tickMutex;
 static bool g_isReady = false;
 static uintptr_t g_gameBase = 0;
 static uintptr_t g_waitTarget = 0;
-static NativeRegistrationHandler g_nativeRegistration = nullptr;
+static NativeInitFn g_nativeRegistration = nullptr;
 
 void __cdecl HookedWait(uint32_t ms) {
     if (g_isReady) {
@@ -41,36 +38,11 @@ void Initialize(void* module_handle) {
 
     MH_Initialize();
 
-    // We cannot blindly cast the pattern address to a function pointer as it might be a LEA instruction.
-    // We must parse the RIP-relative offset. For now, to prevent a crash, we only use the hardcoded RVA.
-    g_waitTarget = g_gameBase + 0x1678AC8;
+    g_waitTarget = Scanner::FindPattern("\x48\x89\x5C\x24\x08\x57\x48\x83\xEC\x20\x8B\xD9\x8B\xFA", "xxxxxxxxxxxxxx");
 
-    if (g_waitTarget && MH_CreateHook(reinterpret_cast<void*>(g_waitTarget), reinterpret_cast<void*>(&HookedWait), reinterpret_cast<void**>(&g_originalWait)) == MH_OK) {
-        MH_EnableHook(reinterpret_cast<void*>(g_waitTarget));
-        g_isReady = true;
+    if (!g_waitTarget) {
+        // GTA V 1.0.3889 WAIT RVA fallback
+        g_waitTarget = g_gameBase + 0x1678AC8;
     }
-}
 
-bool IsReady() {
-    return g_isReady;
-}
-
-void Invoke(NativeHash hash, NativeContext* ctx) {
-    // A proper native invoker requires extracting the registration table safely.
-    // For now, this is a no-op to prevent executing arbitrary memory and crashing.
-}
-
-void SetTick(std::function<void()> callback) {
-    std::lock_guard<std::mutex> lock(g_tickMutex);
-    g_tickCallbacks.push_back(callback);
-}
-
-void Shutdown() {
-    g_isReady = false;
-    if (g_waitTarget) {
-        MH_DisableHook(reinterpret_cast<void*>(g_waitTarget));
-    }
-    MH_Uninitialize();
-}
-
-} // namespace lsa::runtime
+    if (MH_CreateHook(reinterpret_cast<void*>(g_waitTarget), reinterpret_cast<void*>(&HookedWait), reinterpret_cast<void**>(&g_originalWait)) == MH_OK)

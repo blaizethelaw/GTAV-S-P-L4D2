@@ -12,20 +12,30 @@ namespace lsa::portal_logic {
 
 void PortalManager::ShootPortal(bool isBlue) {
     lsa::runtime::NativeContext ctx{};
-    float camCoord[3] = {0.0f, 0.0f, 0.0f};
-    float camRot[3] = {0.0f, 0.0f, 0.0f};
 
     // Get gameplay cam coords
     ctx.arg_count = 0;
-    ctx.return_value = camCoord;
     lsa::runtime::Invoke(0x14D6F5678D8F1B37, &ctx); // GET_GAMEPLAY_CAM_COORD
+
+    float camCoord[3];
+    if (ctx.return_value) {
+        std::memcpy(camCoord, ctx.return_value, sizeof(float) * 3);
+    } else {
+        camCoord[0] = 0; camCoord[1] = 0; camCoord[2] = 0;
+    }
 
     // Get gameplay cam rot
     ctx.arg_count = 1;
     uint64_t rotOrder = 2;
     ctx.args = &rotOrder;
-    ctx.return_value = camRot;
     lsa::runtime::Invoke(0x837765A25378F0BB, &ctx); // GET_GAMEPLAY_CAM_ROT
+
+    float camRot[3];
+    if (ctx.return_value) {
+        std::memcpy(camRot, ctx.return_value, sizeof(float) * 3);
+    } else {
+        camRot[0] = 0; camRot[1] = 0; camRot[2] = 0;
+    }
 
     // Calculate forward vector from rotation
     float rotX = DegToRad(camRot[0]);
@@ -55,18 +65,14 @@ void PortalManager::ShootPortal(bool isBlue) {
 
     // Get player ped to ignore
     ctx.arg_count = 0;
-    uint64_t playerPed = 0;
-    ctx.return_value = &playerPed;
     lsa::runtime::Invoke(0xD80958FC74E988A6, &ctx); // PLAYER_PED_ID
-
-    probeArgs[7] = playerPed;
+    probeArgs[7] = reinterpret_cast<uint64_t>(ctx.return_value);
     probeArgs[8] = 7; // p8
 
     ctx.arg_count = 9;
     ctx.args = probeArgs;
-    uint64_t shapeTestHandle = 0;
-    ctx.return_value = &shapeTestHandle;
     lsa::runtime::Invoke(0x7EE9F5D83DD4F90E, &ctx); // START_SHAPE_TEST_LOS_PROBE
+    uint64_t shapeTestHandle = reinterpret_cast<uint64_t>(ctx.return_value);
 
     // GET_SHAPE_TEST_RESULT (0x3D87450E15D98694)
     // shapeTestHandle, hit, endCoords, surfaceNormal, entityHit
@@ -85,7 +91,6 @@ void PortalManager::ShootPortal(bool isBlue) {
 
     ctx.arg_count = 5;
     ctx.args = resultArgs;
-    ctx.return_value = nullptr;
     lsa::runtime::Invoke(0x3D87450E15D98694, &ctx);
 
     if (hit) {
@@ -165,7 +170,6 @@ void PortalManager::DrawPortal(const Portal& portal, int r, int g, int b) {
 
     ctx.arg_count = 24;
     ctx.args = args;
-    ctx.return_value = nullptr;
 
     lsa::runtime::Invoke(0x28477EC23D892089, &ctx);
 }
@@ -177,11 +181,8 @@ void PortalManager::Update() {
     ctx.arg_count = 2;
     uint64_t attackArgs[2] = {0, 24}; // 0 = Player control group, 24 = Attack
     ctx.args = attackArgs;
-
-    uint64_t isAttackPressed = 0;
-    ctx.return_value = &isAttackPressed;
     lsa::runtime::Invoke(0x580417101DDB492F, &ctx); // IS_CONTROL_JUST_PRESSED
-    if (isAttackPressed != 0) {
+    if (reinterpret_cast<uint64_t>(ctx.return_value) != 0) {
         ShootPortal(true);
     }
 
@@ -189,11 +190,8 @@ void PortalManager::Update() {
     ctx.arg_count = 2;
     uint64_t aimArgs[2] = {0, 25}; // 0 = Player control group, 25 = Aim
     ctx.args = aimArgs;
-
-    uint64_t isAimPressed = 0;
-    ctx.return_value = &isAimPressed;
     lsa::runtime::Invoke(0x580417101DDB492F, &ctx); // IS_CONTROL_JUST_PRESSED
-    if (isAimPressed != 0) {
+    if (reinterpret_cast<uint64_t>(ctx.return_value) != 0) {
         ShootPortal(false);
     }
 
@@ -205,20 +203,17 @@ void PortalManager::Update() {
     }
 
     if (bluePortal.active && orangePortal.active) {
-        ctx.arg_count = 0;
-        uint64_t playerPed = 0;
-        ctx.return_value = &playerPed;
-        lsa::runtime::Invoke(0xD80958FC74E988A6, &ctx); // PLAYER_PED_ID
+        lsa::runtime::NativeContext pedCtx{};
+        pedCtx.arg_count = 0;
+        lsa::runtime::Invoke(0xD80958FC74E988A6, &pedCtx); // PLAYER_PED_ID
+        uint64_t playerPed = reinterpret_cast<uint64_t>(pedCtx.return_value);
 
-        ctx.arg_count = 2;
+        pedCtx.arg_count = 2;
         uint64_t posArgs[2] = {playerPed, 1}; // entity, alive
-        ctx.args = posArgs;
+        pedCtx.args = posArgs;
+        lsa::runtime::Invoke(0x3FEF770D40960D5A, &pedCtx); // GET_ENTITY_COORDS
 
-        float playerPos[3] = {0};
-        ctx.return_value = playerPos;
-        lsa::runtime::Invoke(0x3FEF770D40960D5A, &ctx); // GET_ENTITY_COORDS
-
-        // (Stub: Read ctx.return_value as Vector3, compare against portal.frame.center)
+        // (Stub: Read pedCtx.return_value as Vector3, compare against portal.frame.center)
         // (Stub: Apply transformMotion if crossing occurs and SET_ENTITY_COORDS)
     }
 }

@@ -20,7 +20,8 @@ names = {
     "raycast": "START_SHAPE_TEST_LOS_PROBE START_SHAPE_TEST_CAPSULE GET_SHAPE_TEST_RESULT GET_GROUND_Z_FOR_3D_COORD",
     "controls": "GET_CONTROL_NORMAL IS_CONTROL_JUST_PRESSED DISABLE_CONTROL_ACTION GET_DISABLED_CONTROL_NORMAL IS_DISABLED_CONTROL_JUST_PRESSED IS_USING_KEYBOARD_AND_MOUSE",
     "guard": "NETWORK_IS_GAME_IN_PROGRESS NETWORK_IS_SESSION_ACTIVE",
-    "clock": "GET_GAME_TIMER",
+    "clock": "GET_GAME_TIMER GET_FRAME_COUNT",
+    "script": "GET_THIS_SCRIPT_NAME",
 }
 source = {n["name"]: n for n in json.loads(NATIVES.read_text())}
 expected = {"WAIT": "0x1678AC8", "PLAYER_PED_ID": "0xCE6BE8"}
@@ -36,7 +37,7 @@ for purpose, group in names.items():
 shvpe = pefile.PE(str(SHV)); gamepe = pefile.PE(str(GAME), fast_load=True)
 exports = {x.name.decode() for x in shvpe.DIRECTORY_ENTRY_EXPORT.symbols if x.name}
 settings = {
-    "probe_id": "NativeDump-3889-v2-dev-only",
+    "probe_id": "NativeDump-3889-v3-dev-only",
     "game_version": "1.0.3889.0",
     "game_timestamp": str(gamepe.FILE_HEADER.TimeDateStamp),
     "game_image_size": str(gamepe.OPTIONAL_HEADER.SizeOfImage),

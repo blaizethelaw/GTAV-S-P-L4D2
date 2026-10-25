@@ -1,0 +1,16 @@
+// GTA V SCRIPT HOOK (build Jul 15 2026, v3889.0/1158.13)
+//          (C) Alexander Blade 2015-2026
+[03:12:58] INIT: Started
+[03:12:58] INIT: Success, game version is VER_1_0_3889_0
+[03:12:58] INIT: Registering script 'NativeDump.asi' (0x00007FFEB86C1540)
+[03:13:16] INIT: Pool 1 extended
+[03:13:16] INIT: Pool 2 extended
+[03:13:16] INIT: Pool 3 extended
+[03:13:16] INIT: Pool 4 extended
+[03:13:21] INIT: GtaThread collection size 189
+[03:13:22] INIT: wnd proc 0x00000000FFFF1F35
+[03:13:22] INIT: IDXGISwapChain 0x00007FFF1390D688 (0x00007FFF13859000)
+[03:13:22] INIT: IDXGISwapChain set
+[03:13:22] INIT: DX init started
+[03:13:22] INIT: DX feature level B000
+[03:13:22] INIT: DX init succeeded

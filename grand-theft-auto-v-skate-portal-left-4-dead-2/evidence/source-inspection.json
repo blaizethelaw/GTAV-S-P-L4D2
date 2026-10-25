@@ -1,0 +1,199 @@
+{
+  "scope": "Read-only archive/header inspection; no decoder or gameplay claim",
+  "contentWritten": false,
+  "assets": [
+    {
+      "id": "portal_world_gun",
+      "physical": "portal\\portal_pak_dir.vpk",
+      "bytes": 3564,
+      "sha256": "ac6705a8fb0e7df00161ddbe3517bf8628890d09a841bb346b45c427aeec3849",
+      "mdlVersion": 44,
+      "vertices": 4245,
+      "vtxVersion": 7
+    },
+    {
+      "id": "portal_view_gun",
+      "physical": "portal\\portal_pak_dir.vpk",
+      "bytes": 30928,
+      "sha256": "156a5e01085fe6e82eb1be8aff609f33c3bb20c885b0212e02c0d0c0509615d5",
+      "mdlVersion": 46,
+      "vertices": 8495,
+      "vtxVersion": 7
+    },
+    {
+      "id": "portal_blue_shot",
+      "physical": "portal\\portal_pak_dir.vpk",
+      "bytes": 123484,
+      "sha256": "9bd9a789f2efa387c759d99735e99fc54b05b257380e7b31b574ccd851dc316f",
+      "codec": 1,
+      "channels": 2,
+      "sampleRate": 44100,
+      "bitsPerSample": 16,
+      "frames": 30860
+    },
+    {
+      "id": "portal2_view_gun",
+      "physical": "portal2\\pak01_dir.vpk",
+      "bytes": 32632,
+      "sha256": "14fb2ac9ef030b9a5ffc6861efaa4162ca7717ef5c6f11c0a6cda77875920f68",
+      "mdlVersion": 49,
+      "vertices": 11543,
+      "vtxVersion": 7
+    },
+    {
+      "id": "portal2_world_gun",
+      "physical": "portal2\\pak01_dir.vpk",
+      "bytes": 4988,
+      "sha256": "28f73e41ba11da08c6584debf70909a811846fac4a725246bdbf245b073ee79b",
+      "mdlVersion": 49,
+      "vertices": 6683,
+      "vtxVersion": 7
+    },
+    {
+      "id": "portal2_blue_shot",
+      "physical": "portal2\\pak01_dir.vpk",
+      "bytes": 133396,
+      "sha256": "2a9cdd353254889fa6cbbaceb37e2968c13a33bd2a61aef2aae9f9356d0ff6c6",
+      "codec": 1,
+      "channels": 2,
+      "sampleRate": 44100,
+      "bitsPerSample": 16,
+      "frames": 33300
+    },
+    {
+      "id": "portal2_orange_shot",
+      "physical": "portal2\\pak01_dir.vpk",
+      "bytes": 217960,
+      "sha256": "e2a7befb63c39092952b5cec80f85dc2a4d427f10e6609ecfd4057fdc739ff6e",
+      "codec": 1,
+      "channels": 2,
+      "sampleRate": 44100,
+      "bitsPerSample": 16,
+      "frames": 54441
+    },
+    {
+      "id": "portal2_enter",
+      "physical": "portal2\\pak01_dir.vpk",
+      "bytes": 64420,
+      "sha256": "2067ec77a229bee04cb27919cc1a353079805c09653a6d3019b9b3999c19a686",
+      "codec": 1,
+      "channels": 2,
+      "sampleRate": 44100,
+      "bitsPerSample": 16,
+      "frames": 15043
+    },
+    {
+      "id": "l4d2_tank",
+      "physical": "left4dead2\\pak01_dir.vpk",
+      "bytes": 26748,
+      "sha256": "f3bb076b709d0248e6a4261dbf9a809740a1afd805c56aa344af9ffbd05473ec",
+      "mdlVersion": 49,
+      "vertices": 5633,
+      "vtxVersion": 7
+    },
+    {
+      "id": "l4d2_common",
+      "physical": "left4dead2\\pak01_dir.vpk",
+      "bytes": 21980,
+      "sha256": "5acef6125bd49a39a14c9b42c7c0eb61e21ada1ca1d66127b50f339a05d52d67",
+      "mdlVersion": 49,
+      "vertices": 26332,
+      "vtxVersion": 7
+    },
+    {
+      "id": "l4d2_pistol",
+      "physical": "update\\pak01_dir.vpk",
+      "bytes": 3616,
+      "sha256": "d43ae1bcb6ffae9d935132d3c9a67e032498bdb138249d215506ff76fbaf5818",
+      "mdlVersion": 49,
+      "vertices": 3488,
+      "vtxVersion": 7
+    },
+    {
+      "id": "l4d2_tank_voice",
+      "physical": "left4dead2\\sound\\player\\tank\\voice\\attack\\tank_attack_01.wav",
+      "bytes": 122230,
+      "sha256": "885a5aa027f3f52e6310dcc993e8cd996f9f2992d010d7137003fff754b0bb68",
+      "codec": 1,
+      "channels": 1,
+      "sampleRate": 44100,
+      "bitsPerSample": 16,
+      "frames": 60754
+    }
+  ],
+  "profiles": [
+    {
+      "id": "portal",
+      "game": "portal",
+      "layout": "Portal",
+      "roots": [
+        "portal",
+        "hl2"
+      ],
+      "archives": [
+        "portal/portal_pak_dir.vpk",
+        "hl2/hl2_textures_dir.vpk",
+        "hl2/hl2_sound_misc_dir.vpk",
+        "hl2/hl2_misc_dir.vpk"
+      ],
+      "requiredArchive": "portal/portal_pak_dir.vpk",
+      "mdlVersions": [
+        44,
+        46,
+        48
+      ],
+      "groupHeaderBytes": 25,
+      "stripHeaderBytes": 27
+    },
+    {
+      "id": "portal2",
+      "game": "portal-2",
+      "layout": "Portal2",
+      "roots": [
+        "update",
+        "portal2_dlc3",
+        "portal2_dlc2",
+        "portal2_dlc1",
+        "portal2"
+      ],
+      "archives": [
+        "update/pak01_dir.vpk",
+        "portal2_dlc3/pak01_dir.vpk",
+        "portal2_dlc2/pak01_dir.vpk",
+        "portal2_dlc1/pak01_dir.vpk",
+        "portal2/pak01_dir.vpk"
+      ],
+      "requiredArchive": "portal2/pak01_dir.vpk",
+      "mdlVersions": [
+        49
+      ],
+      "groupHeaderBytes": 33,
+      "stripHeaderBytes": 35
+    },
+    {
+      "id": "l4d2",
+      "game": "left-4-dead-2",
+      "layout": "Left4Dead2",
+      "roots": [
+        "update",
+        "left4dead2_dlc3",
+        "left4dead2_dlc2",
+        "left4dead2_dlc1",
+        "left4dead2"
+      ],
+      "archives": [
+        "update/pak01_dir.vpk",
+        "left4dead2_dlc3/pak01_dir.vpk",
+        "left4dead2_dlc2/pak01_dir.vpk",
+        "left4dead2_dlc1/pak01_dir.vpk",
+        "left4dead2/pak01_dir.vpk"
+      ],
+      "requiredArchive": "left4dead2/pak01_dir.vpk",
+      "mdlVersions": [
+        49
+      ],
+      "groupHeaderBytes": 25,
+      "stripHeaderBytes": 27
+    }
+  ]
+}

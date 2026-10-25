@@ -1,0 +1,287 @@
+{
+  "schemaVersion": 1,
+  "name": "source_mounts",
+  "columns": [
+    "id",
+    "game",
+    "layout",
+    "roots",
+    "archives",
+    "requiredArchive",
+    "mdlVersions",
+    "groupHeaderBytes",
+    "stripHeaderBytes"
+  ],
+  "rows": [
+    {
+      "id": "portal",
+      "game": "portal",
+      "layout": "Portal",
+      "roots": [
+        "portal",
+        "hl2"
+      ],
+      "archives": [
+        "portal/portal_pak_dir.vpk",
+        "hl2/hl2_textures_dir.vpk",
+        "hl2/hl2_sound_misc_dir.vpk",
+        "hl2/hl2_misc_dir.vpk"
+      ],
+      "requiredArchive": "portal/portal_pak_dir.vpk",
+      "mdlVersions": [
+        44,
+        46,
+        48
+      ],
+      "groupHeaderBytes": 25,
+      "stripHeaderBytes": 27
+    },
+    {
+      "id": "portal2",
+      "game": "portal-2",
+      "layout": "Portal2",
+      "roots": [
+        "update",
+        "portal2_dlc3",
+        "portal2_dlc2",
+        "portal2_dlc1",
+        "portal2"
+      ],
+      "archives": [
+        "update/pak01_dir.vpk",
+        "portal2_dlc3/pak01_dir.vpk",
+        "portal2_dlc2/pak01_dir.vpk",
+        "portal2_dlc1/pak01_dir.vpk",
+        "portal2/pak01_dir.vpk"
+      ],
+      "requiredArchive": "portal2/pak01_dir.vpk",
+      "mdlVersions": [
+        49
+      ],
+      "groupHeaderBytes": 33,
+      "stripHeaderBytes": 35
+    },
+    {
+      "id": "l4d2",
+      "game": "left-4-dead-2",
+      "layout": "Left4Dead2",
+      "roots": [
+        "update",
+        "left4dead2_dlc3",
+        "left4dead2_dlc2",
+        "left4dead2_dlc1",
+        "left4dead2"
+      ],
+      "archives": [
+        "update/pak01_dir.vpk",
+        "left4dead2_dlc3/pak01_dir.vpk",
+        "left4dead2_dlc2/pak01_dir.vpk",
+        "left4dead2_dlc1/pak01_dir.vpk",
+        "left4dead2/pak01_dir.vpk"
+      ],
+      "requiredArchive": "left4dead2/pak01_dir.vpk",
+      "mdlVersions": [
+        49
+      ],
+      "groupHeaderBytes": 25,
+      "stripHeaderBytes": 27
+    }
+  ],
+  "checks": {
+    "portal": {
+      "id": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "game": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "layout": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "roots": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "archives": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "requiredArchive": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "mdlVersions": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "groupHeaderBytes": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "stripHeaderBytes": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      }
+    },
+    "portal2": {
+      "id": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "game": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "layout": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "roots": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "archives": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "requiredArchive": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "mdlVersions": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "groupHeaderBytes": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "stripHeaderBytes": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      }
+    },
+    "l4d2": {
+      "id": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "game": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "layout": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "roots": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "archives": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "requiredArchive": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "mdlVersions": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "groupHeaderBytes": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      },
+      "stripHeaderBytes": {
+        "status": "verified",
+        "evidence": "Official install archive existence and selected headers inspected in place; layout fields match file offsets and Valve optimize.h; decoder verification separate",
+        "artifacts": [
+          "evidence/source-inspection.json"
+        ]
+      }
+    }
+  }
+}
